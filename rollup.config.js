@@ -4,6 +4,9 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 
+// plugins
+import alias from "@rollup/plugin-alias";
+
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
@@ -23,7 +26,16 @@ export default {
 			css: css => {
 				css.write('public/build/bundle.css');
 			}
-		}),
+    }),
+    
+    alias({
+      entries: [
+        { find: "@src", replacement: "./src" },
+        { find: "@root", replacement: "./" },
+        { find: "@components", replacement: "./src/components" },
+        { find: "@util", replacement: "./src/util" }
+      ]
+    }),
 
 		// If you have external dependencies installed from
 		// npm, you'll most likely need these plugins. In
