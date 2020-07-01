@@ -1,33 +1,27 @@
 <script>
   export let opacity = null;
-  export let model = null;
 </script>
 
-<!-- Opaque -->
-{#if !opacity}
-  <div>Opaque</div>
-<!-- HEX -->
-{:else if model.toLowerCase() === "hex"}
-  <div>
-    <span>Opacity:</span>
-    <span>
-      {`${(opacity.length === 2)
-        ? Math.round(parseInt(opacity, 16) * 100 / 255)
-        : Math.round(parseInt(opacity, 16) * 100 / 16)
-      }%`}
-    </span>
-  </div>
-<!-- % -->
-{:else if opacity.endsWith("%")}
-  <div>
-    <span>Opacity:</span>
-    <span>{opacity}</span>
-  </div>
-<!-- decimal value -->
-{:else}
-  <div>
-    <span>Opacity:</span>
-    <span>{`${Number(opacity) * 100}%`}</span>
-  </div>
-{/if}
+<style>
+  .block {
+    width: 75px;
+    height: 75px;
+    background: red;
+    border-radius: 25%;
+    filter: drop-shadow(0px 0px 5px rgb(0 0 0 / 0.95));
+  }
+</style>
+
+<div>
+  <!-- Opaque -->
+  {#if opacity === 0}
+    <div>Transparent</div>
+  {:else if !opacity || opacity === 1}
+    <div>Opaque</div>
+  {:else}
+    <div>{(opacity * 100).toFixed(0)}%</div>
+  {/if}
+    <div class="block" style={`opacity:${opacity}`} />
+</div>
+
 
