@@ -5,8 +5,8 @@
 </script>
 
 <main>
-	<h1>Colours</h1>
 	<div id="app">
+    <h1>Colours</h1>
     <ColorInput />
   </div>
 </main>
@@ -19,29 +19,39 @@
   }
 
 	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
-		margin: 0 auto;
+		display: grid;
+    justify-items: center;
+    min-height: 100vh;
+    height: 250vh;
+    width: 100vw;
+
+    font-family: "Annie Use Your Telescope";
 	}
 
   #app {
     display: grid;
     place-items: center;
+    grid-auto-rows: min-content;
     row-gap: 1.25em;
+
+    position: relative;
+
+    margin-top: 4em;
+    width: 100%;
+    max-width: 640px;
   }
 
 	h1 {
 		color: #ff3e00;
-    font-family: "Annie Use Your Telescope";
 		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+		font-size: 5em;
+		font-weight: 200;
 	}
 
-	@media (min-width: 640px) {
-		main {
+	@media (max-width: 640px) {
+		#app {
 			max-width: none;
+      padding: 1.5em;
 		}
 	}
 </style>
