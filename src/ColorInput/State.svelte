@@ -15,7 +15,7 @@
   {#if state === "empty"}
     <ContainerFade>
       <ColorInputTip />
-    </ContainerFade>    
+    </ContainerFade>
   {:else if state}
     <ContainerFade>
       <StateValid {...state} />
