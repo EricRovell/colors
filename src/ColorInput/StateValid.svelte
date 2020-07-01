@@ -1,5 +1,5 @@
 <script>
-  import ModelRepr from "@components/ModelRepr.svelte";
+  import ColorTable from "@components/ColorTable.svelte";
   import Opacity from "@components/Opacity.svelte";
 
   export let model = null;
@@ -20,12 +20,6 @@
   <span>
     {model.toUpperCase()}
   </span>
-  <span>
-    <ModelRepr {value} />
-  </span>
-  <span>
-    <Opacity
-      opacity={alpha}
-      model={model} />
-  </span>
+  <ColorTable {value} />
+  <Opacity opacity={alpha} />
 </div>
