@@ -17,7 +17,7 @@ export default [
   // Groups: (R)(G)(B) 
   {
     model: "hex",
-    props: "shorthand",
+    type: "shorthand",
     expression: compileRegExp({
       parts: [ /^\#?/, hex, hex, hex, hex, "?", /$/ ],
       flags: "i"
@@ -29,7 +29,6 @@ export default [
   // Groups: (RR)(GB)(BB)
   {
     model: "hex",
-    props: "full triplet",
     expression: compileRegExp({
       parts: [ /^\#?/, hex2, hex2, hex2, hex2, "?", /$/ ],
       flags: "i"
@@ -48,9 +47,9 @@ export default [
   // Groups: (R)(G)(B)
   {
     model: "rgb",
-    props: "absolute values",
+    type: "absolute",
     expression: compileRegExp({
-      parts: [ /^(?:rgb)?\W*\(?\W*/, range0to255, /\W+/, range0to255, /\W+/, range0to255, /\W*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:rgb)?[\s+\/]*\(?[\s+\/]*/, range0to255, /[\s+\/]+/, range0to255, /[\s+\/]+/, range0to255, /[\s+\/]*/, opacity, "?", /\)?$/ ],
       flags: "i"
     })
   },
@@ -65,9 +64,9 @@ export default [
   // Groups: (R)(G)(B)
   {
     model: "rgb",
-    props: "percentage values",
+    type: "percentage",
     expression: compileRegExp({
-      parts: [ /^(?:rgb)?\W*\(?\W*/, range0to100, /\%\W+/, range0to100, /\%\W+/, range0to100, /\%\W*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:rgb)?\W*\(?\W*/, range0to100, /\%[\s+\/]+/, range0to100, /\%[\s+\/]+/, range0to100, /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
       flags: "i"
     })
   },
@@ -87,9 +86,8 @@ export default [
   // Groups: (H)(S)(L)
   {
     model: "hsl",
-    props: "percentage values saturation and lightness",
     expression: compileRegExp({
-      parts: [ /^(?:hsl)?\W*\(?\W*/, range0to360, /(?:deg)?/, /\W+/, range0to100, /%\W+/, range0to100, /\%\W*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:hsl)?[\s+\/]*\(?[\s+\/]*/, range0to360, /(?:deg)?/, /[\s+\/]+/, range0to100, /%[\s+\/]/, range0to100, /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
       flags: "i"
     })
   },
@@ -99,9 +97,8 @@ export default [
   // Groups: (H)(S)(V)
   {
     model: "hsv",
-    props: "percentage values saturation and value",
     expression: compileRegExp({
-      parts: [ /^(?:hsv)?\W*\(?\W*/, range0to360, /(?:deg)?/, /\W+/, range0to100, /%\W+/, range0to100, /\%\W*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:hsv)?[\s+\/]*\(?[\s+\/]*/, range0to360, /(?:deg)?/, /[\s+\/]+/, range0to100, /%[\s+\/]+/, range0to100, /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
       flags: "i"
     })
   },
@@ -114,7 +111,7 @@ export default [
   // Groups: (C)(M)(Y)(K)
   {
     model: "cmyk",
-    props: "percentage values",
+    props: "percentage",
     expression: compileRegExp({
       parts: [ /^(?:cmyk)?\W*\(?\W*/, range0to100, /\%\W+/, range0to100, /\%\W+/, range0to100, /\%\W+/, range0to100, /\%\W*/, opacity, "?", /\)?$/ ],
       flags: "i"
