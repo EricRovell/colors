@@ -1,6 +1,6 @@
-import { hex2rgb, rgb2cmyk, hsl2rgb, hsv2rgb } from "./Convertions.js";
+import { hex2rgb, rgb2cmyk, hsl2rgb, hsv2rgb } from "../atomic/convert.js";
 
-export default function toCMYK({ rgb, hex, hsv, cmyk, hsl } = { cmyk: [ 0, 0, 0, 0 ] }) {
+export default function toCMYK({ rgb, hex, hsv, cmyk, hsl }) {
   // same color
   if (cmyk) return cmyk;
   // direct convert available
