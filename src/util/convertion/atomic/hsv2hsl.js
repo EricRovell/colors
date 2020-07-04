@@ -6,17 +6,28 @@
  * @param {Number} hsv[].value - value value in range [0, 1].
  * @returns {Number[]} an array containing HSL model values in range [hue:[0, 360], saturation: [0, 1], lightness: [0, 1]].
  */
-export default function hsv2hsl(hsv) {
-  const [ hue, saturationV, value ] = hsv;
+export default function hsv2hsl({ h, s, v, values = [], asArray = false }) {
+
+  const [ hue, saturationV, value ] = (Array.isArray(values) && values?.length)
+    ? values
+    : [ h, s / 100, v / 100 ];
   
   const lightness = value * (1 - saturationV / 2);
   const saturationL = (lightness === 0 || lightness === 1)
     ? 0
     : (value - lightness) / (Math.min(lightness, 1 - lightness));
 
-  return [
+  const hsl = [
     hue,
-    Number(saturationL.toPrecision(2)),
-    Number(lightness.toPrecision(2))
+    Math.round(saturationL * 100),
+    Math.round(lightness * 100)
   ]
+
+  if (asArray) return hsl;
+
+  return {
+    h: hsl[0],
+    s: hsl[1],
+    l: hsl[2]
+  };
 }
