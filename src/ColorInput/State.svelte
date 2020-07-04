@@ -1,4 +1,6 @@
 <script>
+  import { color } from "@stores/colorStore.js";
+
   // fade in/out container to switch between states
   import ContainerFade from "@components/ContainerFade.svelte";
 
@@ -8,17 +10,17 @@
   import StateInvalid from "./StateInvalid.svelte";
 
   // user input prop
-  export let state = "";
+  export let emptyInput;
 </script>
 
 <div>
-  {#if state === "empty"}
+  {#if emptyInput}
     <ContainerFade>
       <ColorInputTip />
     </ContainerFade>
-  {:else if state}
+  {:else if $color.valid}
     <ContainerFade>
-      <StateValid {...state} />
+      <StateValid model={$color.model} />
     </ContainerFade>
   {:else}
     <ContainerFade>
