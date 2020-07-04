@@ -8,18 +8,19 @@ export default {
    *   - Percentages in range [0, 100] with % symbol: 35%.
    * ! Percent values captured with % symbol
    */
-  opacity: /(0\.\d{1,2}|[1-9]\d{0,1}(?!\d)(?:\%)|100(?:\%)|0|1)/,
+  opacity: /(?<opacity>0\.\d{1,2}|[1-9]\d{0,1}(?!\d)(?:\%)|100(?:\%)|0|1)/,
 
   /**
    * Groups for capturing integer values in range defined range
    */
-  range0to100: /(0|100|\d{1,2})/,
-  range0to255: /([01]?\d\d?|2[0-4]\d|25[0-5])/,  
-  range0to360: /(0|360|35\d|3[0-4]\d|[12]\d\d|0?\d?\d)/,
+  //range0to100: /(0|100|\d{1,2})/,
+  range0to100: groupName => new RegExp(`(?<${groupName}>0|100|\\d{1,2})`),
+  range0to255: groupName => new RegExp(`(?<${groupName}>[01]?\\d\\d?|2[0-4]\\d|25[0-5])`),  
+  range0to360: groupName => new RegExp(`(?<${groupName}>0|360|35\\d|3[0-4]\\d|[12]\\d\\d|0?\\d?\\d)`),
 
   /**
    * Hexadecimal characters
    */
-  hex: /([a-fA-F0-9])/,
-  hex2: /([a-fA-F0-9]{2})/
+  hex: groupName => new RegExp(`(?<${groupName}>[a-fA-F0-9])`),
+  hex2: groupName => new RegExp(`(?<${groupName}>[a-fA-F0-9]{2})`)
 }
