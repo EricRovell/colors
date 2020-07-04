@@ -1,6 +1,6 @@
-import { hex2rgb, hsl2rgb, hsv2rgb, cmyk2rgb, rgb2hex } from "./Convertions.js";
+import { hex2rgb, hsl2rgb, hsv2rgb, cmyk2rgb, rgb2hex } from "../atomic/convert.js";
 
-export default function toHEX({ rgb, hex, hsl, hsv, cmyk } = { rgb: [ 0, 0, 0 ] }) {
+export default function toHEX({ rgb, hex, hsl, hsv, cmyk }) {
   // direct convert available
   if (hex) return hex2rgb(hex);
 
