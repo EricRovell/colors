@@ -13,9 +13,10 @@
     width: 75px;
     height: 75px;
     border-radius: 20%;
+    overflow: hidden;
   }
   .opacity-value > div {
-    background: pink;
+    background: black;
     grid-row: 1;
     grid-column: 1;
   }
