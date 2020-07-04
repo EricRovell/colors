@@ -6,8 +6,11 @@
  * @param {Number} hsl[].value - value in range [0, 1].
  * @returns {Number[]} an array containing RGB model values in range [0, 255].
  */
-export default function hsv2rgb(hsv) {
-  const [ hue, saturation, value ] = hsv;
+export default function hsv2rgb({ h, s, v, values = [], asArray = false }) {
+
+  const [ hue, saturation, value ] = (Array.isArray(values) && values?.length)
+    ? [ values[0], values[1] / 100, values[2] / 100 ]
+    : [ h, s / 100, v / 100 ];
 
   const chroma = value * saturation;
   // will be used as the middle (second-largest) component value
@@ -34,7 +37,15 @@ export default function hsv2rgb(hsv) {
       rgb = [ chroma, 0, middle ]; break;
   }
 
-  return rgb.map(value => Math.round(
-    (value + m) * 255)
-  );
+  if (asArray) {
+    return rgb.map(value => Math.round(
+      (value + m) * 255)
+    );
+  }
+
+  return {
+    r: Math.round(255 * (rgb[0] + m)),
+    g: Math.round(255 * (rgb[1] + m)),
+    b: Math.round(255 * (rgb[2] + m))
+  };
 }
