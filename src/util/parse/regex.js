@@ -1,5 +1,5 @@
 import commonParts from "./commonParts.js";
-import compileRegExp from "../compileRegExp.js";
+import compileRegExp from "./compileRegExp.js";
 
 const {
   hex, hex2,
@@ -19,7 +19,7 @@ export default [
     model: "hex",
     type: "shorthand",
     expression: compileRegExp({
-      parts: [ /^\#?/, hex, hex, hex, hex, "?", /$/ ],
+      parts: [ /^\#?/, hex("r"), hex("g"), hex("b"), hex("opacity"), "?", /$/ ],
       flags: "i"
     })
   },
@@ -30,7 +30,7 @@ export default [
   {
     model: "hex",
     expression: compileRegExp({
-      parts: [ /^\#?/, hex2, hex2, hex2, hex2, "?", /$/ ],
+      parts: [ /^\#?/, hex2("r"), hex2("g"), hex2("b"), hex2("opacity"), "?", /$/ ],
       flags: "i"
     })
   },
@@ -49,7 +49,7 @@ export default [
     model: "rgb",
     type: "absolute",
     expression: compileRegExp({
-      parts: [ /^(?:rgb)?[\s+\/]*\(?[\s+\/]*/, range0to255, /[\s+\/]+/, range0to255, /[\s+\/]+/, range0to255, /[\s+\/]*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:rgb|rgba)?[\s+\/]*\(?[\s+\/]*/, range0to255("r"), /[\s+\/]+/, range0to255("g"), /[\s+\/]+/, range0to255("b"), /[\s+\/]*/, opacity, "?", /\)?$/ ],
       flags: "i"
     })
   },
@@ -66,7 +66,7 @@ export default [
     model: "rgb",
     type: "percentage",
     expression: compileRegExp({
-      parts: [ /^(?:rgb)?\W*\(?\W*/, range0to100, /\%[\s+\/]+/, range0to100, /\%[\s+\/]+/, range0to100, /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:rgb|rgba)?\W*\(?\W*/, range0to100("r"), /\%[\s+\/]+/, range0to100("g"), /\%[\s+\/]+/, range0to100("b"), /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
       flags: "i"
     })
   },
@@ -87,7 +87,7 @@ export default [
   {
     model: "hsl",
     expression: compileRegExp({
-      parts: [ /^(?:hsl)?[\s+\/]*\(?[\s+\/]*/, range0to360, /(?:deg)?/, /[\s+\/]+/, range0to100, /%[\s+\/]/, range0to100, /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:hsl|hsla)?[\s+\/]*\(?[\s+\/]*/, range0to360("h"), /(?:deg)?/, /[\s+\/]+/, range0to100("s"), /%[\s+\/]/, range0to100("l"), /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
       flags: "i"
     })
   },
@@ -98,7 +98,7 @@ export default [
   {
     model: "hsv",
     expression: compileRegExp({
-      parts: [ /^(?:hsv)?[\s+\/]*\(?[\s+\/]*/, range0to360, /(?:deg)?/, /[\s+\/]+/, range0to100, /%[\s+\/]+/, range0to100, /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:hsv|hsva)?[\s+\/]*\(?[\s+\/]*/, range0to360("h"), /(?:deg)?/, /[\s+\/]+/, range0to100("s"), /%[\s+\/]+/, range0to100("v"), /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
       flags: "i"
     })
   },
@@ -113,7 +113,7 @@ export default [
     model: "cmyk",
     props: "percentage",
     expression: compileRegExp({
-      parts: [ /^(?:cmyk)?\W*\(?\W*/, range0to100, /\%\W+/, range0to100, /\%\W+/, range0to100, /\%\W+/, range0to100, /\%\W*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:cmyk)?\W*\(?\W*/, range0to100("c"), /\%\W+/, range0to100("m"), /\%\W+/, range0to100("y"), /\%\W+/, range0to100("k"), /\%\W*/, opacity, "?", /\)?$/ ],
       flags: "i"
     })
   },
