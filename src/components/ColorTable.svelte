@@ -1,7 +1,7 @@
 <script>
   import CircularChart from "@components/svg/CircularChart.svelte";
 
-  export let value;
+  export let data;
 </script>
 
 <style>
@@ -19,10 +19,10 @@
 </style>
 
 <div class="grid-view">
-  {#each value as { property, value, percentage, percent }}
+  {#each data as { property, value, percentage }}
     <div>
       <span>{property}</span>
-      <CircularChart {value} progress={percentage} {percent} />
+      <CircularChart text={property} progress={percentage} />
     </div>
   {/each}
 </div>
