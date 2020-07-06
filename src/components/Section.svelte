@@ -1,50 +1,25 @@
 <script>
-  export let model;
+  export let name;
 </script>
 
-<div class="section-colors">
-  <div>
-    <span>rgb</span>
-    <div>{model.rgb.r}</div>
-    <div>{model.rgb.g}</div>
-    <div>{model.rgb.b}</div>
-  </div>
-  <div>
-    <span>hex</span>
-    <div>{model.hex.r}</div>
-    <div>{model.hex.g}</div>
-    <div>{model.hex.b}</div>
-  </div>
-  <div>
-    <span>hsl</span>
-    <div>{model.hsl.h}</div>
-    <div>{model.hsl.s}</div>
-    <div>{model.hsl.l}</div>
-  </div>
-  <div>
-    <span>hsv</span>
-    <div>{model.hsv.h}</div>
-    <div>{model.hsv.s}</div>
-    <div>{model.hsv.v}</div>
-  </div>
-  <div>
-    <span>cmyk</span>
-    <div>{model.cmyk.c}</div>
-    <div>{model.cmyk.m}</div>
-    <div>{model.cmyk.y}</div>
-    <div>{model.cmyk.k}</div>
-  </div>
-</div>
+<header id={`search-section-${name.toLowerCase()}`}>
+  {name}
+</header>
+<section>
+  <slot>
+    This section is empty...
+  </slot>
+</section>
 
 <style>
-  .section-colors {
-    display: grid;
-    row-gap: 15px;
+  header {
+    font-size: 2em;
   }
-
-  .section-colors > div {
-    display: grid;
-    grid-auto-flow: column;
-    column-gap: 10px;
+  section {
+    width: 100%;
+    padding: 1em;
+    border-radius: 5px;
+    background: white;
+    filter: drop-shadow(1px 1px 5px rgb(0 0 0 / 0.1));
   }
 </style>
