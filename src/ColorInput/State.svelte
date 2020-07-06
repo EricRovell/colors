@@ -14,7 +14,7 @@
 </script>
 
 <div>
-  {#if emptyInput}
+  <!-- {#if emptyInput}
     <ContainerFade>
       <ColorInputTip />
     </ContainerFade>
@@ -26,5 +26,20 @@
     <ContainerFade>
       <StateInvalid />
     </ContainerFade>    
+  {/if} -->
+  {#if emptyInput}
+    <ContainerFade>
+      <ColorInputTip />
+    </ContainerFade>
+  {:else}
+    <ContainerFade>
+      <StateValid />
+    </ContainerFade>
   {/if}
 </div>
+
+<style>
+  div {
+    width: 100%;
+  }
+</style>
