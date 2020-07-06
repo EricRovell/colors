@@ -8,17 +8,49 @@
 
   export let value = "";
   export let clearInput;
-
-  function search(event) {
-    if (event.key === "Enter") {
-      color.setColor(value);
-      console.log(color);
-    }
-  }
-
+  export let randInput;
+  export let makeSearch;
 </script>
 
+<div class="container">
+  <div class="color-search">
+    <Palette />
+    <input
+      type="text"
+      bind:value
+      on:keydown={makeSearch}
+      placeholder="Type any color value...">
+    <Cancel
+      visible={!!value.length}
+      actionClick={clearInput} />
+    <Dice handleClick={randInput} />
+    <Search />
+  </div>
+  <div class="control-panel">
+    <slot />
+  </div>
+</div>
+
 <style>
+  .container {
+    display: grid;
+    row-gap: 10px;
+    width: 100%;
+
+    padding-top: 10px;
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+
+    z-index: 100;
+  }
+
+  .control-panel {
+    display: grid;
+    row-gap: 0.25em;
+    font-family: "Inconsolata", sans-serif;
+    font-size: 1em;
+  }
   .color-search {
     --height: 55px;
     --icon-size: calc(0.5 * var(--height));
@@ -31,13 +63,10 @@
 
     background: white;
     border-radius: 10px;
-    border: 1px solid red;
     width: 100%;
     overflow: hidden;
     padding: 0 0.75em;
-
-    position: sticky;
-    top: 10px;
+    filter: drop-shadow(1px 1px 5px rgb(0 0 0 / 0.1));
 
     font-family: MuseoModerno;
     font-weight: 500;
@@ -47,7 +76,10 @@
   }
 
   .color-search:focus-within {
-    filter: drop-shadow(1px 1px 10px rgb(0 0 0 / 0.25));
+    /* border: 1px solid red; */
+    filter:
+      drop-shadow(1px 1px 5px rgb(0 0 0 / 0.1))
+      drop-shadow(1px 1px 10px rgb(0 0 0 / 0.25));
   }
 
   .color-search:focus-within :global(svg:last-child) {
@@ -85,16 +117,3 @@
   }
 </style>
 
-<div class="color-search">
-  <Palette />
-  <input
-    type="text"
-    bind:value
-    on:keydown={search}
-    placeholder="Type any color value...">
-  <Cancel
-    visible={!!value.length}
-    actionClick={clearInput} />
-  <Dice />
-  <Search />
-</div>
