@@ -1,5 +1,4 @@
 import toModel from "./model/convertionModel.js";
-import validate from "./validate.js";
 
 /**
  * Converts color from one model to another: RGB, HEX, HSL, HSV, CMYK.
@@ -11,16 +10,9 @@ import validate from "./validate.js";
  * String is being return for HEX model, object is being returned in case "ALL" models.
  */
 export default function convertColor({ from, to = null, value }) {
-
-  // validate
-  const validValues = validate({
-    model: from,
-    values: value
-  });
-
   if (!to) {
-    return toModel.all({ [from]: validValues });
+    return toModel.all({ [from]: value });
   }
 
-  return toModel[to]({ [from]: validValues });
+  return toModel[to]({ [from]: value });
 }
