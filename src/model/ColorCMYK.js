@@ -1,5 +1,5 @@
 export default class ColorCMYK {
-  constructor({ c, m, y, k, values } = { values: [0, 0, 0, 0] }) {
+  constructor({ c = 0, m = 0, y = 0, k = 0, values }) {
     
     if (values && Array.isArray(values)) {
       [ this.c, this.m, this.y, this.k ] = values;
@@ -14,6 +14,18 @@ export default class ColorCMYK {
 
   setValue({ c, m, y, k }) {
     [ this.c, this.m, this.y, this.k ] = [ c, m, y, k ];
+  }
+
+  validate({ c, m, y, k }) {
+    [ c, m, y, k ] = [ c, m, y, k ].map(Number)
+
+    if (![ c, m, y, k ].every(value => Number.isInteger(value))) {
+      [ c, m, y, k ] = [ 0, 0, 0];
+    }
+
+    return {
+      c, m, y, k
+    };
   }
 
   get properties() {
@@ -41,11 +53,22 @@ export default class ColorCMYK {
     ] 
   }
 
+  get asArray() {
+    return [ this.c, this.m, this.y, this.k ];
+  }
+
   get toString() {
-    return `cmyk ${this.c}% ${this.m}% ${this.y}% ${this.k}%`
+    return `${this.c} ${this.m} ${this.y} ${this.k}`;
   }
 
   get cssString() {
     return "no support";
+  }
+
+  get randomString() {
+    return "cmyk " + new Array(4)
+      .fill()
+      .map(() => Math.floor(Math.random() * 100))
+      .join(" ");
   }
 }
