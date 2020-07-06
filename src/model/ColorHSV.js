@@ -1,5 +1,5 @@
 export default  class ColorHSV {
-  constructor({ h, s, v, values } = { values: [ 0, 0, 0 ] }) {
+  constructor({ h = 0, s = 0, v = 0, values }) {
     
     if (values && Array.isArray(values)) {
       [ this.h, this.s, this.v ] = values;
@@ -13,6 +13,18 @@ export default  class ColorHSV {
 
   setValue({ h, s, v }) {
     [ this.h, this.s, this.v ] = [ h, s, v ];
+  }
+
+  validate({ h, s, v }) {
+    [ h, s, v ] = [ h, s, v ].map(Number);
+    
+    if (![ h, s, v ].every(value => Number.isInteger(value))) {
+      [ h, s, v ] = [ 0, 0, 0];
+    }
+
+    return {
+      h, s, v
+    };
   }
 
   get properties() {
@@ -35,11 +47,23 @@ export default  class ColorHSV {
     ]
   }
 
+  get asArray() {
+    return [ this.h, this.s, this.v ];
+  }
+
   get toString() {
-    return `hsv ${this.h}deg ${this.s}% ${this.v}%`
+    return `${this.h} ${this.s} ${this.v}`;
   }
 
   get cssString() {
     return `hsv(${this.h}deg ${this.s}% ${this.v}%)`;
+  }
+
+  get randomString() {
+    return "hsv" + [
+      Math.floor(Math.random() * 359),
+      Math.floor(Math.random() * 100),
+      Math.floor(Math.random() * 100)
+    ].join(" ")
   }
 }
