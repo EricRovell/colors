@@ -1,18 +1,42 @@
 import regex from "./regex.js";
 
-export default function determineColorString(str) {
-  // check every expression until 1st valid one
-  for (let expression of regex) {
-    let match = str.match(expression.expression);
-    if (match) {
-      return {
-        model: expression.model,
-        type: expression.type,
-        values: match.groups
-      };
-    }
+export default class ColorParser {
+  constructor() {
+    this.models = regex;
+    this.history = [];
+    this.limit = 15;
+    console.log(`Parser init`);
   }
 
-  // none expression suited
-  return null;
+  parseString(string) {
+    const matches = [];
+    // check every expression
+    for (let expression of this.models) {
+      let match = string.match(expression.expression);
+      if (match) {
+        matches.push({
+          model: expression.model,
+          type: expression.type,
+          values: match.groups
+        });
+      }
+    }
+
+    if (matches.length) {
+      this.history.push(matches);
+      return matches
+    }
+
+    return [];
+  }
+
+  get lastResult() {
+    return this.history[this.history.length - 1];
+  }
+
+  get searchHistory() {
+    return this.history;
+  }
+
+
 }
