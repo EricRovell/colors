@@ -1,5 +1,4 @@
 import convert from "@util/convertion/Any.js";
-import parseColorString from "@util/parse/parseColorString.js";
 
 import ColorRGB from "./ColorRGB.js";
 import ColorHex from "./ColorHex.js";
@@ -10,37 +9,24 @@ import ColorCMYK from "./ColorCMYK.js";
 export default class Color {
   constructor({ rgb, hex, hsl, hsv, cmyk, opacity = 1 } = {}) {
     this.model = {
-      rgb: new ColorRGB(),
-      hex: new ColorHex(),
-      hsl: new ColorHSL(),
-      hsv: new ColorHSV(),
-      cmyk: new ColorCMYK()
+      rgb: new ColorRGB({ rgb }),
+      hex: new ColorHex({ hex }),
+      hsl: new ColorHSL({ hsl }),
+      hsv: new ColorHSV({ hsv }),
+      cmyk: new ColorCMYK({ cmyk })
     };
     this.opacity = opacity;
-
-    // prop to check if the last mutation was valid
-    this.valid = false;
   }
 
-  colorFromString(string) {
-    // try to parse the string
-    const parseResult = parseColorString(string);
-    // no match -> no mutation, remember the failure in `valid` prop
-    if (!parseResult) {
-      this.valid = false;
-      return null;
-    };
-
-    // matched string, we know the model, it's type and object w/ values
-    const { model, type, values } = parseResult;
-
+  set value({ model, type, values }) {
+    console.log(model, values);
     // set opacity if present
     this.opacity = values?.opacity ?? 1;
 
-    // convert to other models
+    // validate values and convert
     const colors = convert({
       from: model,
-      value: values
+      value: this.model[model].validate(values)
     });
 
     // update props in all models
@@ -48,9 +34,16 @@ export default class Color {
       this.model[model].setValue(colors[model]);
     }
 
-    // successful update
-    this.valid = true;
     return true;
-  } 
+  }
+
+  get modelsString() {
+    const data = {};
+    for (let model in this.model) {
+      data[model] = this.model[model].toString;
+    }
+
+    return data;
+  }
   
 }
