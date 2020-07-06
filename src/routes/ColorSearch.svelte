@@ -26,7 +26,7 @@
 
     font-family: "Annie Use Your Telescope";
 
-    background: #f3f0f0;
+    background: var(--bg);
 	}
 
   #app {
