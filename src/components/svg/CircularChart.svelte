@@ -1,14 +1,12 @@
 <script>
-  export let value = 0;
-  //export let max = 100;
+  export let text = "value";
   export let progress = 0;
-  export let percent = false;
 </script>
 
 <style>
   svg {
-    width: 75px;
-    height: 75px;
+    width: 50px;
+    height: 50px;
   }
 </style>
 
@@ -35,6 +33,6 @@
   />
   <!-- value -->
   <text x="18" y="20.35" fill="#666" font-size="0.5em" text-anchor="middle">
-    {value}{percent ? "%" : ""}
+    {text}
   </text>
 </svg>
