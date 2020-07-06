@@ -1,5 +1,5 @@
 export default class ColorHex {
-  constructor({ r, g, b, string } = { r: "00", g: "00", b: "00" }) {
+  constructor({ r = "00", g = "00", b = "00", string }) {
     // check if shorthand
     if ([ r, g, b ].every(value => value?.length === 1)) {
       this.type = "shorthand";
@@ -22,6 +22,17 @@ export default class ColorHex {
 
   setValue({ r, g, b }) {
     [ this.r, this.g, this.b ] = [ r, g, b ];
+  }
+
+  validate({ r, g, b }) {
+    const rgb = [ r, g, b ]
+      .map(value => (value.toString().length === 2) ? value : value + value)
+
+    return {
+      r: rgb[0],
+      g: rgb[1],
+      b: rgb[2]
+    };
   }
 
   get properties() {
@@ -50,13 +61,22 @@ export default class ColorHex {
     ]
   }
 
+  get asArray() {
+    return [ this.r, this.g, this.b ];
+  }
+
   get toString() {
-    return `hex #${this.r}${this.g}${this.b}`
+    return `#${this.r}${this.g}${this.b}`
   }
 
   get cssString() {
     return `#${this.r}${this.g}${this.b})`;
   }
-}
 
-let x = new ColorHex({ r: "af", g: 25, b: "e8" });
+  get randomString() {
+    return "#" + new Array(3)
+      .fill()
+      .map(() => Math.floor(Math.random() * 255).toString(16))
+      .join("")
+  }
+}
