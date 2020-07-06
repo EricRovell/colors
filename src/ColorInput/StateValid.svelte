@@ -1,13 +1,22 @@
 <script>
-  import ColorTable from "@components/ColorTable.svelte";
-  import Opacity from "@components/Opacity.svelte";
-
   import Section from "@components/Section.svelte";
-
-  export let model;
+  import ColorModelValues from "@components/ColorModelValues.svelte";
+  import ColorInfo from "@components/ColorInfo.svelte";
 </script>
 
 
 <div>
-  <Section {model} />
+  <Section name="Information">
+    <ColorInfo />
+  </Section>
+  <Section name="Convertion">
+    <ColorModelValues />
+  </Section>
 </div>
+
+<style>
+  div {
+    display: grid;
+    row-gap: 1em;
+  }
+</style>
