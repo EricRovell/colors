@@ -9,19 +9,19 @@
  */
 export default function cmyk2rgb({ c, m, y, k, values = [], asArray = false }) {
 
-  if (values.length) {
-    [ c, m, y, k ] = values.map(value => value / 100);
-  }
+  const [ cyan, magenta, yellow, key ] = (Array.isArray(values) && values?.length)
+    ? values.map(value => value / 100)
+    : [ c / 100, m / 100, y / 100, k / 100 ];
 
   // return results as an array if needed
   if (asArray) {
-    return [ 1 - c, 1 - m, 1 - y ]
-      .map(value => Math.round(255 * value * (1 - k)))
+    return [ 1 - cyan, 1 - magenta, 1 - yellow ]
+      .map(value => Math.round(255 * value * (1 - key)))
   }
 
   return {
-    r: Math.round(255 * (1 - c) * (1 - k)),
-    g: Math.round(255 * (1 - m) * (1 - k)),
-    b: Math.round(255 * (1 - y) * (1 - k)),
+    r: Math.round(255 * (1 - cyan) * (1 - key)),
+    g: Math.round(255 * (1 - magenta) * (1 - key)),
+    b: Math.round(255 * (1 - yellow) * (1 - key)),
   };
 }
