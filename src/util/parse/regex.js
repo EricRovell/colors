@@ -3,10 +3,11 @@ import compileRegExp from "./compileRegExp.js";
 
 const {
   hex, hex2,
-  range0to100,
+  percentage,
   range0to255,
   range0to360,
-  opacity 
+  opacity,
+  separator
 } = commonParts;
 
 export default [
@@ -49,7 +50,7 @@ export default [
     model: "rgb",
     type: "absolute",
     expression: compileRegExp({
-      parts: [ /^(?:rgb|rgba)?[\s+\/]*\(?[\s+\/]*/, range0to255("r"), /[\s+\/]+/, range0to255("g"), /[\s+\/]+/, range0to255("b"), /[\s+\/]*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:rgb|rgba?)?[\s\/]*\(?[\s\/]*/, range0to255("r"), separator, range0to255("g"), separator, range0to255("b"), opacity, /\)?$/ ],
       flags: "i"
     })
   },
@@ -66,7 +67,7 @@ export default [
     model: "rgb",
     type: "percentage",
     expression: compileRegExp({
-      parts: [ /^(?:rgb|rgba)?\W*\(?\W*/, range0to100("r"), /\%[\s+\/]+/, range0to100("g"), /\%[\s+\/]+/, range0to100("b"), /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:rgb|rgba?)?[\s\/]*\(?[\s\/]*/, percentage("r"), separator, percentage("g"), separator, percentage("b"), opacity, /\)?$/ ],
       flags: "i"
     })
   },
@@ -87,7 +88,7 @@ export default [
   {
     model: "hsl",
     expression: compileRegExp({
-      parts: [ /^(?:hsl|hsla)?[\s+\/]*\(?[\s+\/]*/, range0to360("h"), /(?:deg)?/, /[\s+\/]+/, range0to100("s"), /%[\s+\/]/, range0to100("l"), /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:hsl|hsla)?[\s\/]*\(?[\s\/]*/, range0to360("h"), /(?:deg)?/, separator, percentage("s"), separator, percentage("l"), opacity, /\)?$/ ],
       flags: "i"
     })
   },
@@ -98,7 +99,7 @@ export default [
   {
     model: "hsv",
     expression: compileRegExp({
-      parts: [ /^(?:hsv|hsva)?[\s+\/]*\(?[\s+\/]*/, range0to360("h"), /(?:deg)?/, /[\s+\/]+/, range0to100("s"), /%[\s+\/]+/, range0to100("v"), /\%[\s+\/]*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:hsv|hsva|hsb|hsba)?[\s\/]*\(?[\s\/]*/, range0to360("h"), /(?:deg)?/, separator, percentage("s"), separator, percentage("v"), opacity, /\)?$/ ],
       flags: "i"
     })
   },
@@ -113,7 +114,7 @@ export default [
     model: "cmyk",
     props: "percentage",
     expression: compileRegExp({
-      parts: [ /^(?:cmyk)?\W*\(?\W*/, range0to100("c"), /\%\W+/, range0to100("m"), /\%\W+/, range0to100("y"), /\%\W+/, range0to100("k"), /\%\W*/, opacity, "?", /\)?$/ ],
+      parts: [ /^(?:cmyk)?[\s\/]*\(?[\s\/]*/, percentage("c"), separator, percentage("m"), separator, percentage("y"), separator, percentage("k"), opacity, /\)?$/ ],
       flags: "i"
     })
   },
