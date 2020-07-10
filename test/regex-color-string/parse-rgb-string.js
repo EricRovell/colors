@@ -19,10 +19,7 @@ test("Parse RGB string:", t => {
           model: "rgb",
           type: "absolute",
           values: {
-            r: `${r}`,
-            g: `${g}`,
-            b: `${b}`,
-            opacity: undefined
+            r, g, b
           }
         }]
       );
@@ -37,20 +34,14 @@ test("Parse RGB string:", t => {
             model: "rgb",
             type: "absolute",
             values: {
-              r: `${r}`,
-              g: `${g}`,
-              b: `${b}`,
-              opacity: undefined
+              r, g, b
             }
           },
           {
             model: "rgb",
             type: "percentage",
             values: {
-              r: `${r}`,
-              g: `${g}`,
-              b: `${b}`,
-              opacity: undefined
+              r, g, b
             }
           }
         ]
@@ -71,10 +62,7 @@ test("Parse RGB string:", t => {
           model: "rgb",
           type: "absolute",
           values: {
-            r: `${r}`,
-            g: `${g}`,
-            b: `${b}`,
-            opacity: `${opacity}`
+            r, g, b, opacity
           }
         }]
       );
@@ -89,20 +77,14 @@ test("Parse RGB string:", t => {
             model: "rgb",
             type: "absolute",
             values: {
-              r: `${r}`,
-              g: `${g}`,
-              b: `${b}`,
-              opacity: `${opacity}`
+              r, g, b, opacity
             }
           },
           {
             model: "rgb",
             type: "percentage",
             values: {
-              r: `${r}`,
-              g: `${g}`,
-              b: `${b}`,
-              opacity: `${opacity}`
+              r, g, b, opacity
             }
           }
         ]
@@ -123,10 +105,7 @@ test("Parse RGB string:", t => {
           model: "rgb",
           type: "absolute",
           values: {
-            r: `${r}`,
-            g: `${g}`,
-            b: `${b}`,
-            opacity: `${opacity}`
+            r, g, b, opacity
           }
         }]
       );
@@ -141,20 +120,14 @@ test("Parse RGB string:", t => {
             model: "rgb",
             type: "absolute",
             values: {
-              r: `${r}`,
-              g: `${g}`,
-              b: `${b}`,
-              opacity: `${opacity}`
+              r, g, b, opacity
             }
           },
           {
             model: "rgb",
             type: "percentage",
             values: {
-              r: `${r}`,
-              g: `${g}`,
-              b: `${b}`,
-              opacity: `${opacity}`
+              r, g, b, opacity
             }
           }
         ]
@@ -162,7 +135,6 @@ test("Parse RGB string:", t => {
     }
 
   }
-
 
   // rgb %, w/o opacity
   for (let i = 0; i < 100; i++) {
@@ -174,10 +146,7 @@ test("Parse RGB string:", t => {
         model: "rgb",
         type: "percentage",
         values: {
-          r: `${r}`,
-          g: `${g}`,
-          b: `${b}`,
-          opacity: undefined
+          r, g, b
         }
       }]
     );
@@ -194,10 +163,7 @@ test("Parse RGB string:", t => {
         model: "rgb",
         type: "percentage",
         values: {
-          r: `${r}`,
-          g: `${g}`,
-          b: `${b}`,
-          opacity: `${opacity}`
+          r, g, b, opacity
         }
       }]
     );
@@ -214,10 +180,7 @@ test("Parse RGB string:", t => {
         model: "rgb",
         type: "percentage",
         values: {
-          r: `${r}`,
-          g: `${g}`,
-          b: `${b}`,
-          opacity: `${opacity}`
+          r, g, b, opacity
         }
       }]
     );
