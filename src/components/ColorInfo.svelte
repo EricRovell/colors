@@ -1,12 +1,13 @@
 <script>
   import { color } from "@stores/colorStore.js";
 
+  import Color from "@components/Color.svelte";
   import ColorTable from "@components/ColorTable.svelte";
 </script>
 
 <div class="container">
   <div>
-    Model
+    <Color data={$color.model.rgb.data} />
   </div>
   <ColorTable data={$color.model.rgb.properties} />
   <ColorTable data={$color.model.cmyk.properties} />
