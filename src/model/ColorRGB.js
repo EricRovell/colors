@@ -1,15 +1,9 @@
 export default class ColorRGB {
-  constructor({ r = 0, g = 0, b = 0, type = "absolute", values }) {
+  constructor({ type = "absolute", r = 0, g = 0, b = 0 }) {
     this.type = type;
-
-    if (values && Array.isArray(values)) {
-      [ this.r, this.g, this.b ] = values;
-      return this;
-    }
-    
-    this.r = +r;
-    this.g = +g;
-    this.b = +b;
+    this.r = r;
+    this.g = g;
+    this.b = b;
   }
 
   setValue({ r, g, b }) {
@@ -56,6 +50,18 @@ export default class ColorRGB {
           : this.b,
       },
     ]
+  }
+
+  get data() {
+    return {
+      model: "rgb",
+      type: this.type,
+      value: {
+        r: this.r,
+        g: this.g,
+        b: this.b
+      }
+    };
   }
 
   get asArray() {
