@@ -18,5 +18,6 @@
   div {
     display: grid;
     row-gap: 1em;
+    width: 100%;
   }
 </style>
