@@ -13,8 +13,7 @@ test("Parse HEX string:", t => {
       values: {
         r: "1",
         g: "A",
-        b: "3",
-        opacity: undefined
+        b: "3"
       }
     }]
   );
@@ -41,8 +40,7 @@ test("Parse HEX string:", t => {
       values: {
         r: "12",
         g: "3A",
-        b: "BC",
-        opacity: undefined
+        b: "BC"
       }
     }]
   );
