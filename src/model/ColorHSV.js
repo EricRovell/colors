@@ -1,11 +1,5 @@
 export default  class ColorHSV {
-  constructor({ h = 0, s = 0, v = 0, values }) {
-    
-    if (values && Array.isArray(values)) {
-      [ this.h, this.s, this.v ] = values;
-      return this;
-    }
-    
+  constructor({ h = 0, s = 0, v = 0 }) {
     this.h = +h;
     this.s = +s;
     this.v = +v;
