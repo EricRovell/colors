@@ -14,10 +14,23 @@ export default class ColorParser {
     for (let expression of this.models) {
       let match = string.match(expression.expression);
       if (match) {
+        // deal with opacity value
+        if (match.groups.opacity === undefined) {
+          delete match.groups.opacity
+        }
+        // convert string to numbers, we get only numeric data
+        // HEX model is edge case, we need string values here
+        let values = (expression.model !== "hex")
+          ? Object.fromEntries(
+              Object.entries(match.groups)
+                .map(([ key, value ]) => [ key, Number(value) ])
+            )
+          : match.groups;
+
         matches.push({
           model: expression.model,
           type: expression.type,
-          values: match.groups
+          values
         });
       }
     }
