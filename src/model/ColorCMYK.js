@@ -1,15 +1,9 @@
 export default class ColorCMYK {
-  constructor({ c = 0, m = 0, y = 0, k = 0, values }) {
-    
-    if (values && Array.isArray(values)) {
-      [ this.c, this.m, this.y, this.k ] = values;
-      return this;
-    }
-    
-    this.c = +c;
-    this.m = +m;
-    this.y = +y;
-    this.k = +k;
+  constructor({ c = 0, m = 0, y = 0, k = 0 }) {
+    this.c = c;
+    this.m = m;
+    this.y = y;
+    this.k = k;
   }
 
   setValue({ c, m, y, k }) {
