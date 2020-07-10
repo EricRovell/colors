@@ -1,5 +1,5 @@
 export default class ColorHex {
-  constructor({ r = "00", g = "00", b = "00", string }) {
+  constructor({ r = "00", g = "00", b = "00" }) {
     // check if shorthand
     if ([ r, g, b ].every(value => value?.length === 1)) {
       this.type = "shorthand";
@@ -9,11 +9,6 @@ export default class ColorHex {
       this.b = b + b;
       return this;
     }
-
-    /* if (string && typeof string === "string") {
-      [ this.r, this.g, this.b ] = values;
-      return this;
-    } */
     
     this.r = r;
     this.g = g;
