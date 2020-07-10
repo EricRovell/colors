@@ -1,11 +1,5 @@
 export default class ColorHSL {
-  constructor({ h = 0, s = 0, l = 0, values }) {
-    
-    if (values && Array.isArray(values)) {
-      [ this.h, this.s, this.l ] = values;
-      return this;
-    }
-    
+  constructor({ h = 0, s = 0, l = 0 }) {
     this.h = +h;
     this.s = +s;
     this.l = +l;
