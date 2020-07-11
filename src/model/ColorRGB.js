@@ -30,6 +30,7 @@ export default class ColorRGB {
     return [
       { 
         property: "r",
+        color: "red",
         value: this.r,
         percentage: (this.type === "absolute")
           ? Math.round(this.r * 100 / 255)
@@ -37,6 +38,7 @@ export default class ColorRGB {
       },
       { 
         property: "g",
+        color: "green",
         value: this.g,
         percentage: (this.type === "absolute")
           ? Math.round(this.g * 100 / 255)
@@ -44,6 +46,7 @@ export default class ColorRGB {
       },
       { 
         property: "b",
+        color: "blue",
         value: this.b,
         percentage: (this.type === "absolute")
           ? Math.round(this.b * 100 / 255)
