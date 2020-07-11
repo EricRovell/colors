@@ -19,10 +19,13 @@
 </style>
 
 <div class="grid-view">
-  {#each data as { property, value, percentage }}
+  {#each data as { property, color, value, percentage }}
     <div>
       <span>{property}</span>
-      <CircularChart text={property} progress={percentage} />
+      <CircularChart
+        {color}
+        text={property}
+        progress={percentage} />
     </div>
   {/each}
 </div>
