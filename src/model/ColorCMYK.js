@@ -6,6 +6,18 @@ export default class ColorCMYK {
     this.k = k;
   }
 
+  get data() {
+    return {
+      model: "cmyk",
+      value: {
+        c: this.c,
+        m: this.m,
+        y: this.y,
+        k: this.k
+      }
+    };
+  }
+
   setValue({ c, m, y, k }) {
     [ this.c, this.m, this.y, this.k ] = [ c, m, y, k ];
   }
@@ -26,21 +38,25 @@ export default class ColorCMYK {
     return [
       { 
         property: "c",
+        color: "cyan",
         value: this.c,
         percentage: this.c,
       },
       { 
         property: "m",
+        color: "magenta",
         value: this.m,
         percentage: this.m,
       },
       { 
         property: "y",
+        color: "yellow",
         value: this.y,
         percentage: this.y,
       },
       { 
         property: "k",
+        color: "black",
         value: this.k,
         percentage: this.k,
       },
