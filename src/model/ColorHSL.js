@@ -5,6 +5,17 @@ export default class ColorHSL {
     this.l = +l;
   }
 
+  get data() {
+    return {
+      model: "hsl",
+      value: {
+        h: this.h,
+        s: this.s,
+        l: this.l
+      }
+    };
+  }
+
   setValue({ h, s, l }) {
     [ this.h, this.s, this.l ] = [ h, s, l ];
   }
