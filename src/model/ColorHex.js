@@ -15,6 +15,18 @@ export default class ColorHex {
     this.b = b;
   }
 
+  get data() {
+    return {
+      model: "hex",
+      type: this.type,
+      value: {
+        r: this.r,
+        g: this.g,
+        b: this.b
+      }
+    };
+  }
+
   setValue({ r, g, b }) {
     [ this.r, this.g, this.b ] = [ r, g, b ];
   }
