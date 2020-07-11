@@ -6,11 +6,21 @@ import ColorHSL from "./ColorHSL.js";
 import ColorHSV from "./ColorHSV.js";
 import ColorCMYK from "./ColorCMYK.js";
 
+/** Class representing a Color */
 export default class Color {
-  constructor({ model, value } = {}) {
+  /**
+   * Create a color instance.
+   * @param {object} param - The parameters object.
+   * @param {("rgb"|"hex"|"hsl"|"hsv"|"cmyk")} param.model - The specified model to constructo color from.
+   * @param {object} param.value - The color model values object.
+   */
+  constructor({ model, value } = { model: "rgb", value: { r: 0, g: 0, b: 0 } }) {
     // get all color models
     const data = Color.toAll({ model, value });
 
+    // primary model to work with
+    this.primary = model;
+    // all models
     this.model = {
       rgb: new ColorRGB(data.rgb),
       hex: new ColorHex(data.hex),
@@ -18,18 +28,52 @@ export default class Color {
       hsv: new ColorHSV(data.hsv),
       cmyk: new ColorCMYK(data.cmyk)
     };
+    //
     this.opacity = data?.value ?? 1;
   }
 
+  get rgb() {
+    return this.model.rgb;
+  }
+
+  get hex() {
+    return this.model.hex;
+  }
+
+  get hsl() {
+    return this.model.hsl;
+  }
+
+  get hsv() {
+    return this.model.hsv;
+  }
+
+  get cmyk() {
+    return this.model.cmyk;
+  }
+
+  get data() {
+    return this.model[this.primary].data;
+  }
+
   static toAll({ model, type, value }) {
-    console.log(model);
     return convert({
       from: model,
       value
     });
   }
 
+  /**
+   * Mutates the color value.
+   * @param {object} param - Color parameters object.
+   * @param {("rgb"|"hex"|"hsl"|"hsv"|"cmyk")} param.model - Color's model.
+   * @param {string} [param.type] - Color model's specific properties.
+   * @param {object} param.value - Color model's properties object.
+   */
   set value({ model, type, values }) {
+    // change primary model
+    this.primary = model;
+
     // set opacity if present
     this.opacity = values?.opacity ?? 1;
 
@@ -47,6 +91,47 @@ export default class Color {
     return true;
   }
 
+  /**
+   * Sets/rotates the prime model.
+   * It simplifies working with color properties and getting data.
+   * @param {("rgb"|"hex"|"hsl"|"hsv"|"cmyk"|"NEXT")} [model] - desired model
+   */
+  set key(model) {
+    // if parameter passed and the value is legit -> set
+    if (model !== "NEXT" && this.model.hasOwnProperty(model)) {
+      this.model = model;
+    } else {
+      // no value provided -> rotate key
+      switch(this.primary) {
+        case "rgb": this.primary = "hex"; break;
+        case "hex": this.primary = "hsl"; break;
+        case "hsl": this.primary = "hsv"; break;
+        case "hsv": this.primary = "cmyk"; break;
+        case "cmyk": this.primary = "rgb"; break;
+      }
+    }
+    return this;
+  }
+
+  /**
+   * Get the prime model in use.
+   * It simplifies working with color properties and getting data.
+   */
+  get key() {
+    return this.primary;
+  }
+
+  /**
+   * Get properties for current primary model.
+   */
+  get properties() {
+    return this.model[this.primary].properties;
+  }
+
+  get asArray() {
+    return this.model[this.primary].asArray;
+  }
+
   get modelsString() {
     const data = {};
     for (let model in this.model) {
@@ -54,6 +139,14 @@ export default class Color {
     }
 
     return data;
+  }
+
+  /**
+   * Getting the css compatible rgb color string.
+   * @return {string} The css property string.
+   */
+  get cssColorProperty() {
+    return this.model.rgb.cssString;
   }
 
   get contrast() {
