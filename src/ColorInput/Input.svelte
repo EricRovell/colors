@@ -75,7 +75,8 @@
     transition: filter 0.15s ease-in-out;
   }
 
-  .color-search:focus-within {
+  .color-search:focus-within,
+  .color-search:hover {
     /* border: 1px solid red; */
     filter:
       drop-shadow(1px 1px 5px rgb(0 0 0 / 0.1))
