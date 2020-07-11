@@ -3,51 +3,111 @@
   import contrast from "@util/contrast.js";
 
   import Change from "@components/svg/Change.svelte";
+  import Link from "@components/svg/Link.svelte";
+  import Copy from "@components/svg/Copy.svelte";
 
   export let data;
 
+  // construct color object
   $: color = new Color(data);
-
-  let activeModel = "rgb";
-  let contrastColor;
-
-  $: console.log(color);
+  // dynamic link
+  $: href = `/${color.key}/${color.asArray.join(",")}`;
 </script>
 
-
 <div
-  class="color"
-  style="--color-instance-bg:{color.model.rgb.cssString}; --color-instance-contrast: {color.contrast}">
-  <header>
-    <span class="model">{activeModel}</span>
-    <Change title="Change model" />
-  </header>
-  <div class="values">
-    {#each color.model.rgb.properties as { value }}
-      <span>{value}</span>
-    {/each}
-  </div>
+  class="color-container"
+  style="
+    --color-instance-bg:{color.cssColorProperty};
+    --color-instance-contrast: {color.contrast}">
+    <h3>
+      {color.key.toUpperCase()}
+    </h3>
+    <div class="actions">
+      <Change
+        title="Change model"
+        handleClick={() => color.key = "NEXT"} />
+      <Link {href} />
+      <Copy />
+    </div>
+    <div class="values">
+      {#each color.properties as { value }}
+        <span>{value}</span>
+      {/each}
+    </div>
 </div>
 
-
 <style>
-  .color {
+  .color-container {
+    --icon-size: 1.25em;
+
     display: grid;
-    width: 100px;
-    height: 100px;
+    grid-template: fit-content 1fr / 1fr var(--icon-size);
+    grid-template-areas:
+      "model actions"
+      "values actions";
+    gap: 5px;
+
+    width: 135px;
+    height: 135px;
+    padding: 0.75em;
     border-radius: 5px;
     background: var(--color-instance-bg, white);
     color: var(--color-instance-contrast, black);
     transition: background 0.2s linear;
+
+    user-select: none;
+
+    font-family: "Inconsolata", sans-serif;
   }
 
-  .color .values {
-    display: inherit;
-  }
+  .color-container:hover .actions {
+    opacity: 1;
+  } 
 
-  .color :global(svg) {
-    width: 25px;
-    height: 25px;
+  .color-container :global(svg),
+  .color-container :global(a) {
+    width: var(--icon-size);
+    height: var(--icon-size);
     fill: var(--color-instance-contrast, black);
+    cursor: pointer;
   }
+
+  .color-container :global(svg) {
+    transition: transform 0.15s ease-in-out;
+  }
+
+  .color-container :global(svg):hover {
+    transform: scale(1.1);
+  }
+
+  .color-container :global(svg):active {
+    transform: scale(0.85);
+  }
+
+  h3 {
+    grid-area: model;
+    font-size: 1.25em;
+  }
+
+  .values {
+    grid-area: values;
+
+    display: inherit;
+    gap: inherit;
+    align-items: center;
+  }
+
+  .actions {
+    grid-area: actions;
+    display: inherit;
+    row-gap: calc(0.35 * var(--icon-size));
+    place-content: end;
+
+    width: 100%;
+
+    opacity: 0;
+    transition: opacity 0.2s linear;
+  }
+
+  
 </style>
