@@ -7,10 +7,10 @@
 
 <div class="container">
   <div>
-    <Color data={$color.model.rgb.data} />
+    <Color data={$color.data} />
   </div>
-  <ColorTable data={$color.model.rgb.properties} />
-  <ColorTable data={$color.model.cmyk.properties} />
+  <ColorTable data={$color.rgb.properties} />
+  <ColorTable data={$color.cmyk.properties} />
 </div>
 
 <style>
