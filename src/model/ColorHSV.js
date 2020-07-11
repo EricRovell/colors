@@ -5,6 +5,17 @@ export default  class ColorHSV {
     this.v = +v;
   }
 
+  get data() {
+    return {
+      model: "hsv",
+      value: {
+        h: this.h,
+        s: this.s,
+        v: this.v
+      }
+    };
+  }
+
   setValue({ h, s, v }) {
     [ this.h, this.s, this.v ] = [ h, s, v ];
   }
