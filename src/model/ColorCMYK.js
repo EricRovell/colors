@@ -75,10 +75,9 @@ export default class ColorCMYK {
     return "no support";
   }
 
-  get randomString() {
-    return "cmyk " + new Array(4)
+  get randomArray() {
+    return new Array(4)
       .fill()
       .map(() => Math.floor(Math.random() * 100))
-      .join(" ");
   }
 }
