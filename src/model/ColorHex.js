@@ -2,8 +2,6 @@ export default class ColorHex {
   constructor({ r = "00", g = "00", b = "00" }) {
     // check if shorthand
     if ([ r, g, b ].every(value => value?.length === 1)) {
-      this.type = "shorthand";
-
       this.r = r + r;
       this.g = g + g;
       this.b = b + b;
@@ -80,10 +78,12 @@ export default class ColorHex {
     return `#${this.r}${this.g}${this.b})`;
   }
 
-  get randomString() {
-    return "#" + new Array(3)
+  get randomArray() {
+    return new Array(3)
       .fill()
-      .map(() => Math.floor(Math.random() * 255).toString(16))
-      .join("")
+      .map(() => {
+        const value = Math.floor(Math.random() * 255).toString(16);
+        return (value.length === 2) ? value : value + value;
+      });
   }
 }
