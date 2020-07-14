@@ -64,12 +64,12 @@ export default class ColorHSL {
     return `hsl(${this.h}deg ${this.s}% ${this.l}%)`;
   }
 
-  get randomString() {
-    return "hsl" + [
+  get randomArray() {
+    return [
       Math.floor(Math.random() * 359),
       Math.floor(Math.random() * 100),
       Math.floor(Math.random() * 100)
-    ].join(" ")
+    ];
   }
 
   /* */
