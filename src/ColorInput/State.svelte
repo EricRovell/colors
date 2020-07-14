@@ -10,31 +10,22 @@
   import StateInvalid from "./StateInvalid.svelte";
 
   // user input prop
-  export let emptyInput;
+  export let state;
 </script>
 
 <div>
-  <!-- {#if emptyInput}
+  {#if state === "empty"}
     <ContainerFade>
       <ColorInputTip />
     </ContainerFade>
-  {:else if $color.valid}
+  {:else if state === "valid"}
     <ContainerFade>
-      <StateValid model={$color.model} />
+      <StateValid />
     </ContainerFade>
   {:else}
     <ContainerFade>
       <StateInvalid />
     </ContainerFade>    
-  {/if} -->
-  {#if emptyInput}
-    <ContainerFade>
-      <ColorInputTip />
-    </ContainerFade>
-  {:else}
-    <ContainerFade>
-      <StateValid />
-    </ContainerFade>
   {/if}
 </div>
 
