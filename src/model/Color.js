@@ -70,17 +70,20 @@ export default class Color {
    * @param {string} [param.type] - Color model's specific properties.
    * @param {object} param.value - Color model's properties object.
    */
-  set value({ model, type, values }) {
+  set value({ model = null, type, value } = {}) {
+    // no parameters provided -> do nothing
+    if (!model) return;
+
     // change primary model
     this.primary = model;
 
     // set opacity if present
-    this.opacity = values?.opacity ?? 1;
+    this.opacity = value?.opacity ?? 1;
 
     // validate values and convert
     const colors = convert({
       from: model,
-      value: this.model[model].validate(values)
+      value: this.model[model].validate(value)
     });
 
     // update props in all models
@@ -164,6 +167,17 @@ export default class Color {
     return (lightness > 0.179)
       ? "#000"
       : "#FFF";
+  }
+
+  get randomColorString() {
+    const models = Object.keys(this.model)
+    const model = models[ Math.floor(
+      Math.random() * models.length
+    )];
+
+    return (model === "hex")
+      ? `#${this[model].randomArray.join("")}`
+      : `${model} ${this[model].randomArray.join(" ")}`;
   }
   
 }
