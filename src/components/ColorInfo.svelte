@@ -14,14 +14,14 @@
 </div>
 
 <style>
-    .container {
-      display: grid;
-      grid-template: 1fr 1fr / 1fr 1fr;
-      column-gap: 20px;
-    }
+  .container {
+    display: grid;
+    grid-template: 1fr 1fr / 1fr 1fr;
+    column-gap: 20px;
+  }
 
-    div {
-      grid-row: 1 / span 2;
-      grid-column: 1;
-    }
+  div {
+    grid-row: 1 / span 2;
+    grid-column: 1;
+  }
 </style>
