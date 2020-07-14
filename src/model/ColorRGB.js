@@ -79,11 +79,9 @@ export default class ColorRGB {
     return `rgb(${this.r} ${this.g} ${this.b})`;
   }
 
-  get randomString() {
-    const randRGB = new Array(3)
+  get randomArray() {
+    return new Array(3)
       .fill()
       .map(() => Math.floor(Math.random() * 255))
-
-    return `rgb ${randRGB.join(" ")}`;
   }
 }
