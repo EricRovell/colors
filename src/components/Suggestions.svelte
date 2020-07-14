@@ -1,14 +1,23 @@
 <script>
   import { color } from "@stores/colorStore.js";
+  import { parser } from "@stores/parserStore.js";
 
-  export let suggestions = [];
+  let { lastResult } = parser;
+
+  // current choice
+  let group = $lastResult[0];
+  // update color to current choice
+  $: color.setColor(group);
 </script>
 
 <div class="suggestions">
-  {#each suggestions as data}
-    <span on:click={() => color.setColor(data)}>
-      {`is it ${data.model.toUpperCase()}?`}
-    </span>
+  {#each $lastResult as suggestion}
+    <label>
+      <input type="radio" bind:group value={suggestion}>
+      <span>
+        {`is it ${suggestion?.model?.toUpperCase()}?`}
+      </span>
+    </label>
   {/each}
 </div>
 
@@ -17,7 +26,11 @@
     display: flex;
   }
 
-  .suggestions > span {
+  .suggestions input {
+    display: none
+  }
+
+  .suggestions span {
     background: white;
     padding: 0.25em 0.5em;
     border-radius: 5px;
@@ -26,7 +39,11 @@
     cursor: pointer;
   }
 
-  .suggestions span + span {
+  .suggestions label:not(:first-child) {
     margin-left: 5px;
+  }
+
+  .suggestions input:checked + span {
+    background: red;
   }
 </style>
