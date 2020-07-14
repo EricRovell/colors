@@ -30,7 +30,7 @@
       <Copy />
     </div>
     <div class="values">
-      {#each color.properties as { value }}
+      {#each color.asArray as value}
         <span>{value}</span>
       {/each}
     </div>
