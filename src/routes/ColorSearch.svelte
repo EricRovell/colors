@@ -1,14 +1,13 @@
 <script>
+  import Header from "@src/layout/Header.svelte";
   import ColorInput from "../ColorInput/ColorInput.svelte";
-  import Logo from "@components/svg/Logo.svelte";
 </script>
 
 <main>
 	<div id="app">
-    <h1 class="title">
-      <Logo />
-      <span>Color Wind</span>
-    </h1>
+    <div id="header">
+      <Header />
+    </div>
     <ColorInput />
   </div>
 </main>
@@ -41,29 +40,15 @@
 
     position: relative;
 
-    margin-top: 4em;
     width: 100%;
     max-width: 640px;
   }
 
-  .title {
-    display: grid;
-    place-items: center;
-    grid-auto-flow: column;
-    column-gap: 0.25em;
+  #header {
+    position: relative;
+    width: 100%;
+    height: 25vh;
   }
-
-  .title :global(svg) {
-    width: 0.75em;
-    height: 0.75em;
-  }
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 5em;
-		font-weight: 200;
-	}
 
 	@media (max-width: 640px) {
 		#app {
