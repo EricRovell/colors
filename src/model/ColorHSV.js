@@ -64,11 +64,11 @@ export default  class ColorHSV {
     return `hsv(${this.h}deg ${this.s}% ${this.v}%)`;
   }
 
-  get randomString() {
-    return "hsv" + [
+  get randomArray() {
+    return [
       Math.floor(Math.random() * 359),
       Math.floor(Math.random() * 100),
       Math.floor(Math.random() * 100)
-    ].join(" ")
+    ];
   }
 }
