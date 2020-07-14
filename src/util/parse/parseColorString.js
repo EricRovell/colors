@@ -1,9 +1,11 @@
+import { writable } from "svelte/store";
 import regex from "./regex.js";
 
 export default class ColorParser {
   constructor() {
     this.models = regex;
-    this.history = [];
+    this.history = writable([]);
+    this.query = writable([]);
     this.limit = 15;
     console.log(`Parser init`);
   }
@@ -20,7 +22,7 @@ export default class ColorParser {
         }
         // convert string to numbers, we get only numeric data
         // HEX model is edge case, we need string values here
-        let values = (expression.model !== "hex")
+        let value = (expression.model !== "hex")
           ? Object.fromEntries(
               Object.entries(match.groups)
                 .map(([ key, value ]) => [ key, Number(value) ])
@@ -30,13 +32,15 @@ export default class ColorParser {
         matches.push({
           model: expression.model,
           type: expression.type,
-          values
+          value
         });
       }
     }
 
     if (matches.length) {
-      this.history.push(matches);
+      this.history.update(value => [ ...value, matches ]);
+      this.query.set(matches);
+
       return matches
     }
 
@@ -44,12 +48,11 @@ export default class ColorParser {
   }
 
   get lastResult() {
-    return this.history[this.history.length - 1];
+    return this.query;
   }
 
   get searchHistory() {
     return this.history;
   }
-
 
 }
