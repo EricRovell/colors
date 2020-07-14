@@ -1,11 +1,17 @@
 <script>
   import Section from "@components/Section.svelte";
+
+  import Suggestions from "@components/Suggestions.svelte";
   import ColorModelValues from "@components/ColorModelValues.svelte";
   import ColorInfo from "@components/ColorInfo.svelte";
 </script>
 
+<div class="container">
+  
+    <div class="section-wrapper">
+      <Suggestions />
+    </div>
 
-<div>
   <Section name="Information">
     <ColorInfo />
   </Section>
@@ -15,9 +21,16 @@
 </div>
 
 <style>
-  div {
+  .container {
     display: grid;
     row-gap: 1em;
     width: 100%;
+  }
+
+  .section-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5em;
   }
 </style>
