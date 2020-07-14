@@ -9,7 +9,6 @@
   export let value = "";
   export let clearInput;
   export let randInput;
-  export let makeSearch;
 </script>
 
 <div class="container">
@@ -18,7 +17,6 @@
     <input
       type="text"
       bind:value
-      on:keydown={makeSearch}
       placeholder="Type any color value...">
     <Cancel
       visible={!!value.length}
