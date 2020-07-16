@@ -29,13 +29,21 @@
   }
 </script>
 
-<Input
+<div>
+  <Input
   bind:value={userInput}
   clearInput={() => userInput = ""}
   randInput={() => userInput = $color.randomColorString}>
     {#if state !== "empty"}
       <Navigation />
     {/if}
-</Input>
+  </Input>
+  <State state={state} />
+</div>
 
-<State state={state} />
+<style>
+  div {
+    width: 100%;
+    max-width: 640px;
+  }
+</style>
