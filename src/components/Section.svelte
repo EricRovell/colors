@@ -17,7 +17,7 @@
   }
   section {
     width: 100%;
-    padding: 1em;
+    padding: 2em;
     border-radius: 5px;
     background: white;
     filter: drop-shadow(1px 1px 5px rgb(0 0 0 / 0.1));
