@@ -9,23 +9,19 @@
     display: grid;
     grid-auto-flow: column;
     column-gap: 1em;
+    place-content: center;
   }
 
-  .grid-view > div {
-    display: grid;
-    place-items: center;
-    row-gap: 1em;
+  .grid-view :global(svg) {
+    --size: 40px;
   }
 </style>
 
 <div class="grid-view">
   {#each data as { property, color, value, percentage }}
-    <div>
-      <span>{property}</span>
-      <CircularChart
-        {color}
-        text={property}
-        progress={percentage} />
-    </div>
+    <CircularChart
+      {color}
+      text={value}
+      progress={percentage} />
   {/each}
 </div>
