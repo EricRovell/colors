@@ -22,7 +22,6 @@
       visible={!!value.length}
       actionClick={clearInput} />
     <Dice handleClick={randInput} />
-    <Search />
   </div>
   <div class="control-panel">
     <slot />
@@ -51,11 +50,11 @@
   }
   .color-search {
     --height: 55px;
-    --icon-size: calc(0.5 * var(--height));
+    --icon-size: 1.45em;
 
     display: grid;
     grid-auto-flow: column;
-    grid-template: var(--height) / var(--icon-size) 1fr repeat(3, var(--icon-size));
+    grid-template: var(--height) / var(--icon-size) 1fr repeat(2, var(--icon-size));
     column-gap: 10px;
     place-items: center;
 
@@ -80,11 +79,6 @@
       drop-shadow(1px 1px 5px rgb(0 0 0 / 0.1))
       drop-shadow(1px 1px 10px rgb(0 0 0 / 0.25));
   }
-
-  .color-search:focus-within :global(svg:last-child) {
-    background: #EEF4FF; /* #678EFE */
-  }
-
   input[type=text] {
     background: none;
     outline: none;
