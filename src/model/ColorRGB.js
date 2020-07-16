@@ -55,6 +55,14 @@ export default class ColorRGB {
     ]
   }
 
+  get percentage() {
+    return {
+      r: Math.round(this.r * 100 / 255),
+      g: Math.round(this.g * 100 / 255),
+      b: Math.round(this.b * 100 / 255),
+    };
+  }
+
   get data() {
     return {
       model: "rgb",
