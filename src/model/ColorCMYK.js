@@ -63,6 +63,15 @@ export default class ColorCMYK {
     ] 
   }
 
+  get percentage() {
+    return {
+      c: this.c,
+      m: this.m,
+      y: this.y,
+      k: this.k
+    };
+  }
+
   get asArray() {
     return [ this.c, this.m, this.y, this.k ];
   }
