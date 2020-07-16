@@ -131,6 +131,10 @@ export default class Color {
     return this.model[this.primary].properties;
   }
 
+  get percentage() {
+    return this.model[key].percentage;
+  }
+
   get asArray() {
     return this.model[this.primary].asArray;
   }
