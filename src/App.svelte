@@ -6,11 +6,3 @@
 <body>
   <Router {routes} />
 </body>
-
-<style>
-  /* @import "@styles/themes.css"; */
-
-  :root {
-    --bg: #eee9e9;
-  }
-</style>
