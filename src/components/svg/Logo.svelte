@@ -27,7 +27,7 @@
 
 <style>
   .petals {
-    animation: petals-rotate 1.5s linear infinite;
+    animation: petals-rotate 1s linear infinite;
     animation-play-state: paused;
     transform-origin: 50% 50%;
   }
@@ -37,16 +37,8 @@
   }
 
   @keyframes petals-rotate {
-    0% {
-      transform: rotate(0);
-      animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-    }
-    50% {
-      transform: rotate(1turn);
-      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
     100% {
-      transform: rotate(2turn);
+      transform: rotate(1turn);
     }
   }
 </style>
