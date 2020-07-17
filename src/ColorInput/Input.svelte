@@ -36,6 +36,7 @@
 
     padding-top: 10px;
     background: var(--bg);
+    transition: background 0.35s linear;
     position: sticky;
     top: 0;
 
