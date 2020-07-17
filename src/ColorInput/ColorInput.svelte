@@ -34,7 +34,7 @@
   bind:value={userInput}
   clearInput={() => userInput = ""}
   randInput={() => userInput = $color.randomColorString}>
-    {#if state !== "empty"}
+    {#if state && state !== "empty"}
       <Navigation />
     {/if}
   </Input>
