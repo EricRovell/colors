@@ -15,7 +15,6 @@ export default class ColorParser {
   }
 
   parseString(string) {
-    console.log(string);
     // check for named color
     const named = this.checkForName(string);
 
