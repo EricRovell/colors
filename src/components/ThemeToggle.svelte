@@ -1,8 +1,21 @@
 <script>
   import Moon from "@components/svg/Moon.svelte";
+
+  let theme = "light";
+  $: href = `themes/${theme}.css`;
+
+  const handleSwitch = () => {
+    theme = (theme === "light")
+      ? "dark"
+      : "light";
+  }
 </script>
 
-<div>
+<svelte:head>
+  <link rel="stylesheet" {href}>
+</svelte:head>
+
+<div on:click={handleSwitch}>
   <Moon />
 </div>
 
