@@ -32,5 +32,6 @@
 <style>
   div {
     width: 100%;
+    margin: 1.5em 0 25vh 0;
   }
 </style>
