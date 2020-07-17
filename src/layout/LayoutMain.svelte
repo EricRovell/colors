@@ -14,14 +14,12 @@
 <style>
   #layout-main {
     width: 100%;
-
-    background: var(--bg);
   }
 
   .content {
     display: grid;
     justify-items: center;
     width: 100%;
-    min-height: 150vh;
+    min-height: 100vh;
   }
 </style>
