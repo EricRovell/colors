@@ -35,8 +35,7 @@ export default {
         { find: "@components", replacement: "./src/components" },
         { find: "@util", replacement: "./src/util" },
         { find: "@routes", replacement: "./src/routes" },
-        { find: "@stores", replacement: "./src/stores" },
-        { find: "@styles", replacement: "./src/styles" }
+        { find: "@stores", replacement: "./src/stores" }
       ]
     }),
 
