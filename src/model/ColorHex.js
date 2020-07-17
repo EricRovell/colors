@@ -16,7 +16,6 @@ export default class ColorHex {
   get data() {
     return {
       model: "hex",
-      type: this.type,
       value: {
         r: this.r,
         g: this.g,
