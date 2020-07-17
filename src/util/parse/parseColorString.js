@@ -3,35 +3,27 @@ import regex from "./regex.js";
 
 export default class ColorParser {
   constructor() {
-    this.models = regex;
+    this.expressions = regex;
     this.history = writable([]);
     this.query = writable([]);
     this.limit = 15;
+
     console.log(`Parser init`);
   }
 
   parseString(string) {
     const matches = [];
-    // check every expression
-    for (let expression of this.models) {
-      let match = string.match(expression.expression);
+
+    for (let [ expression, model ] of this.expressions.entries()) {
+      let match = string.match(expression);
       if (match) {
-        // deal with opacity value
-        if (match.groups.opacity === undefined) {
-          delete match.groups.opacity
-        }
-        // convert string to numbers, we get only numeric data
-        // HEX model is edge case, we need string values here
-        let value = (expression.model !== "hex")
-          ? Object.fromEntries(
-              Object.entries(match.groups)
-                .map(([ key, value ]) => [ key, Number(value) ])
-            )
-          : match.groups;
+
+        const value = (model === "hex")
+          ? match.groups
+          : ColorParser.processGroups(match.groups);
 
         matches.push({
-          model: expression.model,
-          type: expression.type,
+          model,
           value
         });
       }
@@ -45,6 +37,18 @@ export default class ColorParser {
     }
 
     return [];
+  }
+
+  static processGroups({ opacity, ...rest }) {
+    // deal with opacity value
+    const values = (opacity === undefined)
+      ? rest
+      : { ...rest, opacity };
+
+    return Object.fromEntries(
+      Object.entries(values)
+        .map(([ key, value ]) => [ key, Number(value) ])
+    );
   }
 
   get lastResult() {
