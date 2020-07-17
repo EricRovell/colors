@@ -70,7 +70,7 @@ export default class Color {
    * @param {string} [param.type] - Color model's specific properties.
    * @param {object} param.value - Color model's properties object.
    */
-  set value({ model = null, type, value } = {}) {
+  set value({ model = null, value } = {}) {
     // no parameters provided -> do nothing
     if (!model) return;
 
