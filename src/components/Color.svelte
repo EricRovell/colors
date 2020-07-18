@@ -11,7 +11,7 @@
   // construct color object
   $: color = new Color(data);
   // dynamic link
-  $: href = `/${color.key}/${color.asArray.join(",")}`;
+  $: href = `/color/${color.key}/${color.asArray.join(",")}`;
 </script>
 
 <div
