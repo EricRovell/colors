@@ -1,16 +1,8 @@
 export default class ColorRGB {
-  constructor({ type = "absolute", r = 0, g = 0, b = 0 }) {
-
-    if (type === "percentage") {
-      this.r = Math.round(r / 100 * 255);
-      this.g = Math.round(g / 100 * 255);
-      this.b = Math.round(b / 100 * 255);
-      return;
-    }
-
-    this.r = r;
-    this.g = g;
-    this.b = b;
+  constructor(values) {
+    [ this.r, this.g, this.b ] = (Array.isArray(values))
+      ? values
+      : [ values.r, values.g, values.b ];
   }
 
   setValue({ r, g, b }) {
