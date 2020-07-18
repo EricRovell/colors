@@ -34,7 +34,7 @@
     row-gap: 10px;
     width: 100%;
 
-    padding-top: 10px;
+    padding: 10px 0;
     background: var(--bg);
     transition: background 0.35s linear;
     position: sticky;
