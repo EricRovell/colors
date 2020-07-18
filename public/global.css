@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --max-width: 720px;
+}
+
 html, body {
 	position: relative;
 	width: 100%;
