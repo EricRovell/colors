@@ -13,7 +13,7 @@
 
 <style>
   header {
-    font-size: 2em;
+    font-size: 1.25em;
   }
   section {
     width: 100%;
