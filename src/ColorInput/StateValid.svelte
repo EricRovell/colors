@@ -17,7 +17,7 @@
   <Section name="Information">
     <ColorInfo />
   </Section>
-  <Section name="Convertion">
+  <Section name="Models">
     <ColorModelValues />
   </Section>
   <Section name="Preview">
