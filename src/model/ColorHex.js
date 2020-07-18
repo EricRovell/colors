@@ -1,16 +1,15 @@
 export default class ColorHex {
-  constructor({ r = "00", g = "00", b = "00" }) {
+  constructor(values) {
+    [ this.r, this.g, this.b ] = (Array.isArray(values))
+      ? values
+      : [ values.r, values.g, values.b ];
+
     // check if shorthand
-    if ([ r, g, b ].every(value => value?.length === 1)) {
-      this.r = r + r;
-      this.g = g + g;
-      this.b = b + b;
-      return this;
-    }
-    
-    this.r = r;
-    this.g = g;
-    this.b = b;
+    [ this.r, this.g, this.b ].map(value => {
+      return (value.length === 1)
+        ? value + value
+        : value
+    });
   }
 
   get data() {
