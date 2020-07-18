@@ -1,9 +1,9 @@
 <script>
-  const sections = [ "Information", "Convertion" ];
+  import sections from "@stores/sections.js";
 </script>
 
 <ol>
-  {#each sections as sectionName}
+  {#each $sections as sectionName}
     <li>
       <a href={`#search-section-${sectionName.toLowerCase()}`}>
         {sectionName}
