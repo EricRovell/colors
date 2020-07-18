@@ -1,6 +1,6 @@
 export default [
   {
-    label: "Search a color",
+    label: "Search",
     href: "/"
   },
   {
