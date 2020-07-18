@@ -4,8 +4,16 @@
 </script>
 
 <style>
+  svg {
+    transform: scale(1);
+    transition: 
+      opacity 0.25s ease-in-out,
+      transform 0.25s ease-in-out;
+  }
+
   .hidden {
     opacity: 0;
+    transform: scale(0) rotate(90deg);
     pointer-events: none;
   }
 </style>
