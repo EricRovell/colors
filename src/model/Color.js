@@ -183,5 +183,37 @@ export default class Color {
       ? `#${this[model].randomArray.join("")}`
       : `${model} ${this[model].randomArray.join(" ")}`;
   }
+
+  get isGrayscale() {
+    return (this.hsl.s === 0);
+  }
+
+  get isDark() {
+    return (this.hsl.l < 0.5);
+  }
+
+  generateShades(shades) {
+    return this.hsl.generateShades(shades);
+  }
+
+  generateTints(tints) {
+    return this.hsl.generateTints(tints);
+  }
+
+  static get availablePalettes() {
+    return [
+      "monochromatic",
+      "complementary",
+      "analogous",      
+      "splitComplementary",
+      "triadic",
+      "tetradic",
+      "square",
+    ];
+  }
+
+  getPalette(palette) {
+    return this.hsl[palette];
+  }
   
 }
