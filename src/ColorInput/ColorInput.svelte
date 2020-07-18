@@ -44,6 +44,6 @@
 <style>
   div {
     width: 100%;
-    max-width: 640px;
+    max-width: var(--max-width, 640);
   }
 </style>
