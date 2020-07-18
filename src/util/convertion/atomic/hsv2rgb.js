@@ -1,16 +1,23 @@
 /**
- * Converts HSV color string to RGB model values.
- * @param {Number[]} hsl - The HSV color model values array.
- * @param {Number} hsl[].hue - hue value in range [0, 360].
- * @param {Number} hsl[].saturation - saturation value in range [0, 1].
- * @param {Number} hsl[].value - value in range [0, 1].
- * @returns {Number[]} an array containing RGB model values in range [0, 255].
+ * Converts HSV/HSB color to RGB model values.
+ * @param {Number[]|object} values - The HSV color model values array or object with channel as keys.
+ * @param {object} [parameters] - Parameters object.
+ * @param {boolean} [parameters.asArray=false] - Return result as array. 
+ * @returns {object|Number[]} an array containing RGB model values.
  */
-export default function hsv2rgb({ h, s, v, values = [], asArray = false }) {
+export default function hsv2rgb(values, { asArray = false } = {}) {
 
-  const [ hue, saturation, value ] = (Array.isArray(values) && values?.length)
-    ? [ values[0], values[1] / 100, values[2] / 100 ]
-    : [ h, s / 100, v / 100 ];
+  let hsv;
+
+  if (Array.isArray(values)) {
+    hsv = (values.length === 3)
+      ? values
+      : [ 0, 0, 0 ];
+  } else {
+    hsv = [ values.h, values.s, values.v ];
+  }
+
+  const [ hue, saturation, value ] = [ hsv[0], hsv[1] / 100, hsv[2] / 100 ];
 
   const chroma = value * saturation;
   // will be used as the middle (second-largest) component value
