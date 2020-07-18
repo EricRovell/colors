@@ -1,17 +1,23 @@
 /**
- * Converts HSL color string to RGB model values.
- * @param {Number[]} hsl - The HSL color model values array.
- * @param {Number} hsl[].hue - hue value in range [0, 360].
- * @param {Number} hsl[].saturation - saturation value in range [0, 100].
- * @param {Number} hsl[].lightness - lightness value in range [0, 100].
- * @returns {Number[]} an array containing RGB model values in range [0, 255].
+ * Converts HSL color to RGB model values.
+ * @param {Number[]|object} values - The HSL color model values array or object with channel as keys.
+ * @param {object} [parameters] - Parameters object.
+ * @param {boolean} [parameters.asArray=false] - Return result as array. 
+ * @returns {object|Number[]} an array containing RGB model values.
  */
-export default function hsl2rgb({ h, s, l, values = [], asArray = false }) {
+export default function hsl2rgb(values, { asArray = false } = {}) {
 
-  // get params from array or predefined HSL values
-  const [ hue, saturation, lightness ] = (Array.isArray(values) && values?.length)
-    ? values
-    : [ h, s / 100, l / 100 ];
+  let hsl;
+
+  if (Array.isArray(values)) {
+    hsl = (values.length === 3)
+      ? values
+      : [ 0, 0, 0 ];
+  } else {
+    hsl = [ values.h, values.s, values.l ];
+  }
+
+  const [ hue, saturation, lightness ] = [ hsl[0], hsl[1] / 100, hsl[2] / 100 ];
 
   const chroma = (1 - Math.abs(2 * lightness - 1)) * saturation;
   // to adjust each of the values for lightness
