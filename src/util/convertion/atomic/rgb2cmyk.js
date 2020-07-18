@@ -1,12 +1,27 @@
 /**
  * Converts RGB color string to CMYK model values.
- * @param {Number[]} rgb - The RGB color model values array, values in range [0, 255]
- * @returns {Number[]} an array containing CMYK model values in range [0, 1].
+ * @param {Number[]|object} values - The RGB color model values array or object with channel as keys.
+ * @param {object} [parameters] - Parameters object.
+ * @param {boolean} [parameters.asArray=false] - Return result as array. 
+ * @returns {Number[]} an array containing CMYK model values.
  */
-export default function rgb2cmyk({ r, g, b, values = [], asArray = false }) {
-  const [ red, green, blue ] = (Array.isArray(values) && values?.length)
-    ? values.map(value => value / 255)
-    : [ r / 255, g / 255, b / 255 ];
+export default function rgb2cmyk(values, { asArray = false } = {}) {
+
+  let rgb;
+
+  if (Array.isArray(values)) {
+    if (values.length === 3) {
+      rgb = values;
+    } else if (values.length === 1) {
+      rgb = new Array(3).fill(values[0]);
+    } else {
+      rgb = [ 0, 0, 0 ];
+    }
+  } else {
+    rgb = [ values.r, values.g, values.b ];
+  }
+  
+  const [ red, green, blue ] = rgb.map(value => value / 255);
 
   const k = 1 - Math.max(red, green, blue);
   const [ c, m, y ] = [
