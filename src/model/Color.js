@@ -29,7 +29,7 @@ export default class Color {
       cmyk: new ColorCMYK(data.cmyk)
     };
     //
-    this.opacity = data?.value ?? 1;
+    this.opacity = (data && data.value) ?? 1;
   }
 
   get rgb() {
@@ -78,7 +78,7 @@ export default class Color {
     this.primary = model;
 
     // set opacity if present
-    this.opacity = value?.opacity ?? 1;
+    this.opacity = value.opacity ?? 1;
 
     // validate values and convert
     const colors = convert({
