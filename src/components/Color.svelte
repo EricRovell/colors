@@ -38,17 +38,18 @@
 
 <style>
   .color-container {
-    --icon-size: 1.25em;
+    --size: 100px;
+    --icon-size: 1.2em;
 
     display: grid;
     grid-template: fit-content 1fr / 1fr var(--icon-size);
     grid-template-areas:
-      "model actions"
-      "values actions";
+      "model values"
+      "actions values";
     gap: 5px;
 
-    width: 135px;
-    height: 135px;
+    width: var(--size);
+    height: var(--size);
     padding: 0.75em;
     border-radius: 5px;
     background: var(--color-instance-bg, white);
@@ -58,6 +59,7 @@
     user-select: none;
 
     font-family: "Inconsolata", sans-serif;
+    font-size: 14px;
   }
 
   .color-container:hover .actions {
@@ -94,14 +96,16 @@
 
     display: inherit;
     gap: inherit;
-    align-items: center;
+    place-content: end end;
+    place-items: end;
   }
 
   .actions {
     grid-area: actions;
     display: inherit;
+    grid-template: 1fr 1fr / 1fr 1fr;
     row-gap: calc(0.35 * var(--icon-size));
-    place-content: end;
+    place-content: end start;
 
     width: 100%;
 
