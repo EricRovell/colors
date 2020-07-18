@@ -1,15 +1,35 @@
 /**
  * Converts RGBA color string to HEX model value.
- * @param {Number[]} rgba - The RGB color model values array, values in range [0, 255]
+ * @param {Number[]|object} values - The RGB color model values array or object with channel as keys.
+ * @param {object} [parameters] - Parameters object.
+ * @param {boolean} [parameters.asArray=false] - Return result as array. 
+ * @param {boolean} [parameters.asString=false] - Return result as string. 
  * @returns {string} HEX value string with Hash symbol and uppercase value symbols.
  */
-export default function rgb2hex({ r, g, b, values = [], asArray = false, asString = false }) {
+export default function rgb2hex(values, { asArray = false, asString = false } = {}) {
 
-  // get values from array or predefined RGB values and map them to hex string
-  const hex = ((Array.isArray(values) && values?.length)
-    ? values
-    : [ r, g, b ])
-      .map(value => value.toString(16))
+  let rgb;
+
+  // from array
+  if (Array.isArray(values)) {
+    if (values.length === 3) {
+      rgb = values;
+    } else if (values.length === 1) {
+      rgb = new Array(3).fill(values[0]);
+    } else {
+      rgb = [ 0, 0, 0 ];
+    }
+  // from object
+  } else {
+    rgb = [ values.r, values.g, values.b ];
+  }
+
+  // -> to hex values
+  const hex = rgb 
+    .map(value => {
+      const hexValue = value.toString(16);
+      return (hexValue.length === 2) ? hexValue : hexValue + hexValue;
+    });
 
   if (asString) {
     return `#${hex.join("").toUpperCase()}`;
