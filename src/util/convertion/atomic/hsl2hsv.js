@@ -1,16 +1,23 @@
 /**
- * Converts HSL color string to HSV model values.
- * @param {Number[]} hsl - The HSL color model values.
- * @param {Number} hsl[].hue - hue value in range [0, 360].
- * @param {Number} hsl[].saturation - saturation value in range [0, 100].
- * @param {Number} hsl[].lightness - lightness value in range [0, 100].
- * @returns {Number[]} an array containing HSV model values in range [[0, 360], [0, 100], [0, 100]]
+ * Converts HSL color to HSV/HSB model values.
+ * @param {Number[]|object} values - The HSL color model values array or object with channel as keys.
+ * @param {object} [parameters] - Parameters object.
+ * @param {boolean} [parameters.asArray=false] - Return result as array. 
+ * @returns {object|Number[]} an array containing HSV/HSB model values.
  */
-export default function hsl2hsv({ h, s, l, values = [], asArray = false }) {
+export default function hsl2hsv(values, { asArray = false } = {}) {
 
-  let [ hue, saturation, lightness ] = (Array.isArray(values) && values?.length)
-    ? [ values[0], values[1] / 100, values[2] / 100 ]
-    : [ h, s / 100, l / 100 ];
+  let hsl;
+
+  if (Array.isArray(values)) {
+    hsl = (values.length === 3)
+      ? values
+      : [ 0, 0, 0 ];
+  } else {
+    hsl = [ values.h, values.s, values.l ];
+  }
+
+  const [ hue, saturation, lightness ] = [ hsl[0], hsl[1] / 100, hsl[2] / 100 ];
 
   // calculate value and saturation for HSV
   const value = lightness + saturation * Math.min(lightness, 1 - lightness);
