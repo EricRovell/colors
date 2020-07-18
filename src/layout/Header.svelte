@@ -1,5 +1,7 @@
 <script>
   import navRoutes from "@routes/navigation-routes.js";
+  import { link } from "svelte-spa-router";
+  import active from "svelte-spa-router/active"; 
 
   import Logo from "@components/svg/Logo.svelte";
   import ThemeToggle from "@components/ThemeToggle.svelte";
@@ -15,7 +17,9 @@
       <ol>
         {#each navRoutes as { label, href }}
           <li>
-            <a {href}>{label}</a>
+            <a {href} use:active use:link>
+              {label}
+            </a>
           </li>
         {/each}
       </ol>
@@ -71,24 +75,69 @@
 		font-size: 2em;
 		font-weight: 200;
     user-select: none;
-	}
+  }
 
   nav {
     grid-area: navigation;
+    height: 100%;
   }
 
   nav ol {
     display: grid;
     grid-auto-flow: column;
-    column-gap: 0.35em;
+    column-gap: 1em;
   }
 
+  nav ol,
+  nav li,
   nav a {
+    height: 100%;
+  }
+
+  a {
     color: black;
     text-transform: lowercase;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  :global(nav a.active) {
+    color: red !important;
+    position: relative;
+  }
+
+  :global(nav a.active::after) {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: black;
   }
 
   .controls {
     grid-area: controls;
+  }
+
+
+  @media screen and (max-width: 520px) {
+
+    .header-wrapper {
+      width: 100%;
+      height: calc(50px + 10vh);
+    }
+
+    header {
+      height: 50px;
+      padding: 0.25em 1em;
+    }
+
+    .logo h1 {
+      display: none;
+    }
+
   }
 </style>
