@@ -1,8 +1,8 @@
 export default  class ColorHSV {
-  constructor({ h = 0, s = 0, v = 0 }) {
-    this.h = +h;
-    this.s = +s;
-    this.v = +v;
+  constructor(values) {
+    [ this.h, this.s, this.v ] = (Array.isArray(values))
+      ? values
+      : [ values.h, values.s, values.v ];
   }
 
   get data() {
@@ -71,4 +71,6 @@ export default  class ColorHSV {
       Math.floor(Math.random() * 100)
     ];
   }
+
+  
 }
