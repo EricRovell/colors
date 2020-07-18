@@ -39,4 +39,12 @@
     display: grid;
     row-gap: 0.85em;
   }
+
+  @media screen and (max-width: 500px) {
+    .container {
+      grid-template: auto auto / 1fr;
+      place-items: center;
+      row-gap: 1.5em;
+    }
+  }
 </style>
