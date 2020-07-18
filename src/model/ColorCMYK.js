@@ -1,9 +1,8 @@
 export default class ColorCMYK {
-  constructor({ c = 0, m = 0, y = 0, k = 0 }) {
-    this.c = c;
-    this.m = m;
-    this.y = y;
-    this.k = k;
+  constructor(values) {
+    [ this.c, this.m, this.y, this.k ] = (Array.isArray(values))
+      ? values
+      : [ values.c, values.m, values.y, values.k ];
   }
 
   get data() {
