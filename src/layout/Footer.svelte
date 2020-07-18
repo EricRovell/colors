@@ -31,7 +31,7 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    max-width: 640px;
+    max-width: var(--max-width, 640px);
     margin: auto;
   }
 
