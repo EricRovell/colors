@@ -20,7 +20,7 @@
           <rect x="1" y="1" width="454" height="451.74" rx="75" />
         </svg>
         <span>
-          {`is it ${suggestion?.model?.toUpperCase()}?`}
+          {`is it ${suggestion.model.toUpperCase()}?`}
         </span>
       </label>
     {/each}
