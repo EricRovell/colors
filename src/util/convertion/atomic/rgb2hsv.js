@@ -1,16 +1,27 @@
 /**
  * Converts RGB color string to HSV model values.
- * @param {Number[]} rgb - The RGB color model values array in range [0, 255].
- * @param {Number} hsl[].hue - hue value in range [0, 359].
- * @param {Number} hsv[].saturation - saturation value in range [0, 100].
- * @param {Number} hsv[].value - value in range [0, 100].
- * @returns {Number[]} an array containing RGB model values in range [0, 255].
+ * @param {Number[]|object} values - The RGB color model values array or object with channel as keys.
+ * @param {object} [parameters] - Parameters object.
+ * @param {boolean} [parameters.asArray=false] - Return result as array. 
+ * @returns {Number[]} an array containing HSV model values.
  */
-export default function rgb2hsv({ r, g, b, values = [], asArray = false }) {
+export default function rgb2hsv(values, { asArray = false } = {}) {
 
-  const [ red, green, blue ] = (Array.isArray(values) && values?.length)
-    ? values.map(value => value / 255)
-    : [ r / 255, g / 255, b / 255 ];
+  let rgb;
+
+  if (Array.isArray(values)) {
+    if (values.length === 3) {
+      rgb = values;
+    } else if (values.length === 1) {
+      rgb = new Array(3).fill(values[0]);
+    } else {
+      rgb = [ 0, 0, 0 ];
+    }
+  } else {
+    rgb = [ values.r, values.g, values.b ];
+  }
+
+  const [ red, green, blue ] = rgb.map(value => value / 255);
 
   const [ min, max ] = [ Math.min(red, green, blue), Math.max(red, green, blue) ];
   const chroma = max - min;
