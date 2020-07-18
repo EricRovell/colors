@@ -1,17 +1,23 @@
 /**
- * Converts CMYK color to RGB model
- * @param {Number[]} cmyk - The CMYK model values, each in range [0, 100]
- * @param {Number} cmyk[].cyan - value in range [0, 100].
- * @param {Number} cmyk[].magenta - value in range [0, 100].
- * @param {Number} cmyk[].yellow - value in range [0, 100].
- * @param {Number} cmyk[].black - value in range [0, 100].
- * @returns {Number[]} an array containing RGB model values in range [0, 255]
+ * Converts CMYK color to RGB model values.
+ * @param {Number[]|object} values - The CMYK color model values array or object with channel as keys.
+ * @param {object} [parameters] - Parameters object.
+ * @param {boolean} [parameters.asArray=false] - Return result as array. 
+ * @returns {object|Number[]} an array containing HSV/HSB model values.
  */
-export default function cmyk2rgb({ c, m, y, k, values = [], asArray = false }) {
+export default function cmyk2rgb(values, { asArray = false } = {}) {
 
-  const [ cyan, magenta, yellow, key ] = (Array.isArray(values) && values?.length)
-    ? values.map(value => value / 100)
-    : [ c / 100, m / 100, y / 100, k / 100 ];
+  let cmyk;
+
+  if (Array.isArray(values)) {
+    cmyk = (values.length === 4)
+      ? values
+      : [ 0, 0, 0, 0 ];
+  } else {
+    cmyk = [ values.c, values.m, values.y, values.k ];
+  }
+
+  const [ cyan, magenta, yellow, key ] = cmyk.map(value => value / 100);
 
   // return results as an array if needed
   if (asArray) {
