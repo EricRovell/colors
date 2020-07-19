@@ -35,7 +35,7 @@
     width: 100%;
 
     padding: 10px 0;
-    background: var(--bg);
+    background: var(--color-1);
     transition: background 0.35s linear;
     position: sticky;
     top: 0;
@@ -59,7 +59,7 @@
     column-gap: 10px;
     place-items: center;
 
-    background: white;
+    background: var(--card-bg);
     border-radius: 10px;
     width: 100%;
     overflow: hidden;
@@ -68,7 +68,7 @@
 
     font-family: MuseoModerno;
     font-weight: 500;
-    color: rgb(18 18 31);
+    color: var(--color-gray-600);
 
     transition: filter 0.15s ease-in-out;
   }
