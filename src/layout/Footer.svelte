@@ -42,4 +42,8 @@
     place-items: center;
   }
 
+  .author a {
+    color: var(--color-3);
+  }
+
 </style>
