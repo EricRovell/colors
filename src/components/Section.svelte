@@ -19,7 +19,7 @@
     width: 100%;
     padding: 2em;
     border-radius: 5px;
-    background: white;
+    background: var(--card-bg, white);
     filter: drop-shadow(1px 1px 5px rgb(0 0 0 / 0.1));
   }
 </style>
