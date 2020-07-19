@@ -1,3 +1,24 @@
 :root {
   --bg: rgb(18 23 31);
+
+  --color-1: hsl(217 27% 10%); /* set */
+  --color-2: hsl(191 33% 52%); /* set */
+  --color-3: hsl(19 66% 67%); /* set */
+  --color-4: hsl(0 0% 93%);
+  
+
+  --color-3-35: hsl(19 66% 67% / 0.35); /* set */
+
+  --card-bg: hsl(217 27% 18%); /* set */
+
+  --color-gray-100: hsl(210 15% 20%);
+  --color-gray-200: hsl(210 15% 25%);
+  --color-gray-300: hsl(210 10% 40%);
+  --color-gray-400: hsl(210 9% 45%);
+  --color-gray-500: hsl(210 8% 50%);
+  --color-gray-600: hsl(210 12% 55%);
+  --color-gray-700: hsl(210 14% 66%);
+  --color-gray-800: hsl(210 18% 77%);
+  --color-gray-900: hsl(210 25% 88%);
+  --color-gray-1000: hsl(210, 25% 96%);
 }
