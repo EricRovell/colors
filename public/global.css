@@ -6,6 +6,8 @@
 
 :root {
   --max-width: 720px;
+
+  color: var(--color-gray-800);
 }
 
 html, body {
@@ -18,12 +20,11 @@ html, body {
 }
 
 body {
-  background: var(--bg);
+  background: var(--color-1);
   transition: background 0.35s linear;
 }
 
 a {
-	color: rgb(0,100,200);
 	text-decoration: none;
 }
 
@@ -37,10 +38,8 @@ label {
 
 input, button, select, textarea {
 	font-family: inherit;
-	font-size: inherit;
-	box-sizing: border-box;
-	border: 1px solid #ccc;
-	border-radius: 2px;
+  font-size: inherit;
+  color: inherit;
 }
 
 input:disabled {
@@ -52,8 +51,6 @@ input[type="range"] {
 }
 
 button {
-	color: #333;
-	background-color: #f4f4f4;
 	outline: none;
 }
 
