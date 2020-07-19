@@ -3,39 +3,35 @@
 
   $: css = $color.cssColorProperty;
   $: contrast = $color.contrast;
-
-  let previewColor = "This text has some color";
-  let previewBg = "This text has some color";
-  let previewBorder = "This text has some color";
 </script>
 
 <div class="container">
   <!-- preview text color -->
   <section>
-    <p class="preview-text" style="color: {css}; background: {contrast}">
-      {previewColor}
+    <p
+      contenteditable="true"
+      class="preview-text"
+      style="color: {css}; background: {contrast}">
+      This is example of text color
     </p>
-    <div>
-      <input type="text" bind:value={previewColor}>
-    </div>
   <!-- preview backgound color -->
   </section>
   <section>
-    <p class="preview-background" style="background: {css}; color: {contrast}">
-      {previewBg}
+    <p
+      contenteditable="true"
+      class="preview-background"
+      style="background: {css}; color: {contrast}">
+      This is example of background color
     </p>
-    <div>
-      <input type="text" bind:value={previewBg}>
-    </div>
   </section>
   <!-- preview border color -->
   <section>
-    <p class="preview-border" style="border: 2px solid {css}">
-      {previewBorder}
+    <p
+      contenteditable="true"
+      class="preview-border"
+      style="border: 2px solid {css}">
+      This is example of border color
     </p>
-    <div>
-      <input type="text" bind:value={previewBorder}>
-    </div>
   </section>
 </div>
 
