@@ -10,7 +10,7 @@
   div {
     width: 100%;
     height: 100%;
-    max-width: 640px;
+    max-width: var(--max-width, 640px);
     display: flex;
     justify-content: center;
   }
