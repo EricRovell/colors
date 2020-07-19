@@ -38,7 +38,7 @@
   header {
     height: 50px;
     padding: 0.25em 2em;
-    border-bottom: 1px solid rgb(0 0 0 / 0.05);
+    border-bottom: 1px solid var(--color-3-35);
 
     display: grid;
     grid-template: 1fr / auto 1fr auto auto;
@@ -69,7 +69,7 @@
   }
 
 	h1 {
-		color: #ff3e00;
+		color: var(--color-3);
 		text-transform: lowercase;
     font-family: "Annie Use Your Telescope";
 		font-size: 2em;
@@ -95,7 +95,9 @@
   }
 
   a {
-    color: black;
+    position: relative;
+
+    color: var(--color-gray-500);
     text-transform: lowercase;
     height: 100%;
     display: flex;
@@ -103,9 +105,22 @@
     align-items: center;
   }
 
+  a:hover {
+    color: var(--color-gray-1000) !important;
+  }
+
+  a:hover::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--color-3-35);
+  }
+
   :global(nav a.active) {
-    color: red !important;
-    position: relative;
+    color: var(--color-gray-1000) !important;
   }
 
   :global(nav a.active::after) {
@@ -115,7 +130,7 @@
     left: 0;
     width: 100%;
     height: 3px;
-    background: black;
+    background: var(--color-3);
   }
 
   .controls {
