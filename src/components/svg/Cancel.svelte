@@ -5,6 +5,7 @@
 
 <style>
   svg {
+    fill: var(--color-3);
     transform: scale(1);
     transition: 
       opacity 0.25s ease-in-out,
