@@ -20,16 +20,24 @@ export default  class ColorHSV {
     [ this.h, this.s, this.v ] = [ h, s, v ];
   }
 
-  validate({ h, s, v }) {
-    [ h, s, v ] = [ h, s, v ].map(Number);
-    
-    if (![ h, s, v ].every(value => Number.isInteger(value))) {
-      [ h, s, v ] = [ 0, 0, 0];
+  static validate(values) {
+    if (
+      !Array.isArray(values) ||
+      values.length !== 3 ||
+      !values.every(Number.isInteger)
+    ) {
+      return false;
     }
 
-    return {
-      h, s, v
-    };
+    if (
+      values[0] < 0 || values > 359 ||
+      values[1] < 0 || values[1] > 100 ||
+      values[2] < 0 || values[2] > 100
+    ) {
+      return false;
+    }
+
+    return true;
   }
 
   get properties() {
