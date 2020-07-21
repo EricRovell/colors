@@ -9,20 +9,12 @@ export default class ColorRGB {
     [ this.r, this.g, this.b ] = [ r, g, b];
   }
 
-  validate({ r, g, b }) {
-    const rgb = [ r, g, b ]
-      .map(Number)
-      .map(value => {
-        return (value >= 0 && value <= 255)
-          ? value
-          : 0
-      });
-
-    return {
-      r: rgb[0],
-      g: rgb[1],
-      b: rgb[2]
-    };
+  static validate(values) {
+    return (
+      Array.isArray(values) &&
+      values.length === 3 &&
+      values.every(value => value >= 0 && value <= 255)
+    );
   }
 
   get properties() {
