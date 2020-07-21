@@ -5,6 +5,10 @@ export default class ColorHSL {
       : [ values.h, values.s, values.l ];
   }
 
+  get model() {
+    return "hsl";
+  }
+
   get data() {
     return {
       model: "hsl",
@@ -20,16 +24,24 @@ export default class ColorHSL {
     [ this.h, this.s, this.l ] = [ h, s, l ];
   }
 
-  validate({ h, s, l }) {
-    [ h, s, l ] = [ h, s, l ].map(Number);
-
-    if (![ h, s, l ].every(value => Number.isInteger(value))) {
-      [ h, s, l ] = [ 0, 0, 0];
+  static validate(values) {
+    if (
+      !Array.isArray(values) ||
+      values.length !== 3 ||
+      !values.every(Number.isInteger)
+    ) {
+      return false;
     }
 
-    return {
-      h, s, l
-    };
+    if (
+      values[0] < 0 || values > 359 ||
+      values[1] < 0 || values[1] > 100 ||
+      values[2] < 0 || values[2] > 100
+    ) {
+      return false;
+    }
+
+    return true;
   }
 
   get properties() {
@@ -76,9 +88,10 @@ export default class ColorHSL {
     const colors = [];
     const step = Math.ceil(50 / shades);
     for (let lightness = 50; lightness >= 0; lightness -= step) {
-      colors.push(
-        [ this.h, this.s, lightness ]
-      );
+      colors.push({
+        model: "hsl",
+        values: [ this.h, this.s, lightness ]
+      });
     }
 
     return colors;
@@ -88,9 +101,10 @@ export default class ColorHSL {
     const colors = [];
     const step = Math.ceil(50 / tints);
     for (let lightness = 50; lightness <= 100; lightness += step) {
-      colors.push(
-        [ this.h, this.s, lightness ]
-      );
+      colors.push({
+        model: "hsl",
+        values: [ this.h, this.s, lightness ]
+      });
     }
 
     return colors;
@@ -106,50 +120,107 @@ export default class ColorHSL {
 
   get analogous() {
     return [
-      [ this.rotateHue(30), this.s, this.l ],
-      [ this.h, this.s, this.l ],
-      [ this.rotateHue(330), this.s, this.l ]
+      {
+        model: "hsl",
+        values: [ this.rotateHue(30), this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.h, this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.rotateHue(330), this.s, this.l ]
+      },
     ];
   }
 
   get complementary() {
     return [
-      [ this.h, this.s, this.l ],
-      [ this.rotateHue(180), this.s, this.l ]
+      {
+        model: "hsl",
+        values: [ this.h, this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.rotateHue(180), this.s, this.l ]
+      }
     ];
   }
 
   get splitComplementary() {
     return [
-      [ this.rotateHue(150), this.s, this.l ],
-      [ this.h, this.s, this.l ],
-      [ this.rotateHue(210), this.s, this.l ]
+      {
+        model: "hsl",
+        values: [ this.rotateHue(150), this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.h, this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.rotateHue(210), this.s, this.l ]
+      },
     ];
   }
 
   get triadic() {
     return [
-      [ this.rotateHue(120), this.s, this.l ],
-      [ this.h, this.s, this.l ],
-      [ this.rotateHue(240), this.s, this.l ]
+      {
+        model: "hsl",
+        values: [ this.rotateHue(120), this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.h, this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.rotateHue(240), this.s, this.l ]
+      },
     ];
   }
 
   get tetradic() {
     return [
-      [ this.h, this.s, this.l ],
-      [ this.rotateHue(120), this.s, this.l ],  
-      [ this.rotateHue(180), this.s, this.l ],
-      [ this.rotateHue(300), this.s, this.l ]
+      {
+        model: "hsl",
+        values: [ this.h, this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.rotateHue(120), this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.rotateHue(180), this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.rotateHue(300), this.s, this.l ]
+      }
     ];
   }
 
   get square() {
     return [
-      [ this.h, this.s, this.l ],
-      [ this.rotateHue(90), this.s, this.l ],  
-      [ this.rotateHue(180), this.s, this.l ],
-      [ this.rotateHue(270), this.s, this.l ]
+      {
+        model: "hsl",
+        values: [ this.h, this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.rotateHue(90), this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.rotateHue(180), this.s, this.l ]
+      },
+      {
+        model: "hsl",
+        values: [ this.rotateHue(270), this.s, this.l ]
+      }
     ];
   }
 
@@ -171,7 +242,10 @@ export default class ColorHSL {
     const step = Math.floor((end - start) / 5);
 
     for (let lightness = start; lightness <= end; lightness += step) {
-      colors.push([ this.h, this.s, lightness ]);
+      colors.push({
+        model: "hsl",
+        values: [ this.h, this.s, lightness ]
+      });
     }
 
     return colors;
