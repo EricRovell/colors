@@ -1,5 +1,23 @@
 <script>
+  import Palette from "@components/Palette.svelte";
+
   export let params = {};
+
+  function parseColors(string) {
+    return string
+      .split("&")
+      .map(color => {
+        const [ model, ...values ] = color.split(",");
+        return {
+          model,
+          values: values.map(Number)
+        };
+      });
+  }
+
+  $: data = parseColors(params.colors);
 </script>
 
-<p>`Model is: ${params.model} and values are: ${JSON.stringify(params.values)}`</p>
+<div>
+  <Palette colors={data} />
+</div>
