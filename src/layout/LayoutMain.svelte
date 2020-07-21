@@ -22,4 +22,10 @@
     width: 100%;
     min-height: 100vh;
   }
+
+  @media screen and (max-width: 720px) {
+    .content {
+      padding: 0 0.5em;
+    }
+  }
 </style>
