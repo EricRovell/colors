@@ -9,6 +9,6 @@ import toModel from "./model/convertionModel.js";
  * @returns {string|Number[]|object} Resulting target model color value.
  * String is being return for HEX model, object is being returned in case "ALL" models.
  */
-export default function convertColor({ from, to = "all", value }) {
-  return toModel[to]({ [from]: value });
+export default function convertColor({ from, to = "all", values }) {
+  return toModel[to]({ [from]: values });
 }
