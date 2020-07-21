@@ -8,7 +8,7 @@ export default  class ColorHSV {
   get data() {
     return {
       model: "hsv",
-      value: {
+      values: {
         h: this.h,
         s: this.s,
         v: this.v

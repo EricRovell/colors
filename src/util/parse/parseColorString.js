@@ -36,7 +36,7 @@ export default class ColorParser {
     if (hex) {
       return {
         model: "hex",
-        value: {
+        values: {
           r: hex.slice(1, 3),
           g: hex.slice(3, 5),
           b: hex.slice(5)
@@ -55,13 +55,13 @@ export default class ColorParser {
       let match = string.match(expression);
       if (match) {
         // hex has string values, others are numeral
-        const value = (model === "hex")
+        const values = (model === "hex")
           ? match.groups
           : ColorParser.processGroups(match.groups);
 
         matches.push({
           model,
-          value
+          values
         });
       }
     }

@@ -8,7 +8,7 @@ export default class ColorCMYK {
   get data() {
     return {
       model: "cmyk",
-      value: {
+      values: {
         c: this.c,
         m: this.m,
         y: this.y,

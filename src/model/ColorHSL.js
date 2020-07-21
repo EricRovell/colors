@@ -12,7 +12,7 @@ export default class ColorHSL {
   get data() {
     return {
       model: "hsl",
-      value: {
+      values: {
         h: this.h,
         s: this.s,
         l: this.l

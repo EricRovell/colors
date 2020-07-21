@@ -51,7 +51,7 @@ export default class ColorRGB {
   get data() {
     return {
       model: "rgb",
-      value: {
+      values: {
         r: this.r,
         g: this.g,
         b: this.b
