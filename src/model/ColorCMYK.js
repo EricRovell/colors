@@ -21,16 +21,12 @@ export default class ColorCMYK {
     [ this.c, this.m, this.y, this.k ] = [ c, m, y, k ];
   }
 
-  validate({ c, m, y, k }) {
-    [ c, m, y, k ] = [ c, m, y, k ].map(Number)
-
-    if (![ c, m, y, k ].every(value => Number.isInteger(value))) {
-      [ c, m, y, k ] = [ 0, 0, 0];
-    }
-
-    return {
-      c, m, y, k
-    };
+  static validate(values) {
+    return (
+      Array.isArray(values) &&
+      values.length === 4 &&
+      values.every(value => value >= 0 && value <= 100)
+    );
   }
 
   get properties() {
