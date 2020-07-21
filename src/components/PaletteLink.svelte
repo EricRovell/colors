@@ -1,8 +1,15 @@
 <script>
   import Color from "@src/model/Color.js";
   import ColorLink from "@components/ColorLink.svelte";
+  import PaletteControls from "@components/PaletteControls.svelte";
 
   export let colors = [];
+
+  let row = false;
+  
+  $: href = "/palette/" + colors
+      .map(({ model, values }) => [ model, ...values].toString())
+      .join("&");
 </script>
 
 <!--
@@ -20,7 +27,8 @@
   Each Color component get according Color instance model from factory.
 -->
 <div>
-  <ol>
+  <PaletteControls bind:row {href} />
+  <ol class:row={row}>
     {#each colors as { model, values }}
       <li>
         <ColorLink color={Color.model({ model, values })} />
@@ -34,8 +42,9 @@
 <style>
   div {
     display: grid;
+    row-gap: 0.75em;
     width: 100%;
-    height: 100%;  
+    height: 100%;
   }
 
   ol {
@@ -43,5 +52,10 @@
     grid-auto-flow: column;
     place-content: start;
     overflow-x: auto;
+  }
+
+  .row {
+    grid-auto-flow: row;
+    grid-template-columns: 1fr;
   }
 </style>
