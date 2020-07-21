@@ -1,11 +1,14 @@
-<script>
+<script context="module">
   import Color from "@src/model/Color.js";
-  import contrast from "@util/contrast.js";
 
   import Change from "@components/svg/Change.svelte";
   import Link from "@components/svg/Link.svelte";
   import Copy from "@components/svg/Copy.svelte";
 
+  export const Constructor = Color;
+</script>
+
+<script>
   export let data;
 
   // construct color object
