@@ -17,11 +17,10 @@
   .color {
     --size: 100px;
 
-    width: var(--size);
+    width: 100%;
     height: var(--size);
 
     background: var(--color);
-    transition: background 0.15s linear;
-    
+    transition: background 0.15s linear;  
   }
 </style>
