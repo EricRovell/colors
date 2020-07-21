@@ -46,4 +46,10 @@
     color: var(--color-3);
   }
 
+  @media screen and (max-width: 720px) {
+    footer {
+      font-size: 0.65em;
+    }
+  }
+
 </style>
