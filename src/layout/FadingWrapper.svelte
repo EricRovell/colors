@@ -10,14 +10,8 @@
   div {
     width: 100%;
     height: 100%;
-    max-width: var(--max-width, 640px);
+    max-width: var(--max-width);
     display: flex;
     justify-content: center;
-  }
-
-  @media screen and (max-width: 520px) {
-    div {
-      padding: 0 1em;
-    }
   }
 </style>
