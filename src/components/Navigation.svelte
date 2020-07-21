@@ -2,17 +2,25 @@
   import sections from "@stores/sections.js";
 </script>
 
-<ol>
-  {#each $sections as sectionName}
-    <li>
-      <a href={`#search-section-${sectionName.toLowerCase()}`}>
-        {sectionName}
-      </a>
-    </li>
-  {/each}
-</ol>
+<div>
+  <ol>
+    {#each $sections as sectionName}
+      <li>
+        <a href={`#search-section-${sectionName.toLowerCase()}`}>
+          {sectionName}
+        </a>
+      </li>
+    {/each}
+  </ol>
+</div>
+
 
 <style>
+  div {
+    width: 100%;
+    overflow: auto;
+  }
+
   ol {
     list-style: none;
 
