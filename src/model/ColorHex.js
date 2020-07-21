@@ -27,15 +27,19 @@ export default class ColorHex {
     [ this.r, this.g, this.b ] = [ r, g, b ];
   }
 
-  validate({ r, g, b }) {
-    const rgb = [ r, g, b ]
-      .map(value => (value.toString().length === 2) ? value : value + value)
-
-    return {
-      r: rgb[0],
-      g: rgb[1],
-      b: rgb[2]
-    };
+  static validate(values) {
+    return (
+      Array.isArray(values) &&
+      values.length === 3 &&
+      values.every(hex => {
+        const value = parseInt(hex);
+        return (
+          value >= 0 &&
+          value <= 255 &&
+          hex.length === 2
+        );
+      })
+    );
   }
 
   get properties() {
